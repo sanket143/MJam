@@ -1,0 +1,20 @@
+{
+  "name": "mjam",
+  "version": "1.0.0",
+  "description": "An MP3 Player",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/sanket143/mjam",
+  "keywords": [
+    "MP3",
+    "Media",
+    "Player"
+  ],
+  "author": "Sanket Chaudhari",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^5.0.7"
+  }
+}
