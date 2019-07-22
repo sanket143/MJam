@@ -14,9 +14,10 @@
       </div> -->
       <div v-for="value in artists">
         <h3>{{ value.artist }}</h3>
-        <ol>
-          <li v-for="song in value.songs">{{ song.title }}</li>
-        </ol>
+        <div class="album-art" v-for="song in value.songs">
+          <img v-bind:src="song.picture.data">
+          <h6>{{ song.title }}</h6>
+        </div>
       </div>
     </div>
 </ul>

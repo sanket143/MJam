@@ -1,7 +1,3 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// All of the Node.js APIs are available in this process.
-
 const electron = require("electron");
 const jsmediatags = require("jsmediatags");
 const path = require("path");
@@ -13,6 +9,7 @@ fs.readdir(`${HOME}/Music`, function(err, files){
     if(path.extname(file) == ".mp3"){
       return jsmediatags.read(`${HOME}/Music/${file}`, {
         onSuccess: function(tag){
+          tag.tags.picture.data = getAlbumArt(tag);
           song_list.song_tags.push(tag.tags);
           if(song_list.artists_index.indexOf(tag.tags.artist) != -1){
             var index = song_list.artists_index.indexOf(tag.tags.artist);
@@ -40,3 +37,14 @@ let song_list = new Vue({
     artists: []
   }
 })
+
+const getAlbumArt = function(tags){
+  const picture = tags.tags.picture;
+  let base64String = "";
+  for(var i = 0; i < picture.data.length; i++){
+    base64String += String.fromCharCode(picture.data[i]);
+  }
+  const imageURI = "data:" + picture.format + ";base64," + window.btoa(base64String);
+  let image = electron.nativeImage.createFromDataURL(imageURI);
+  return imageURI;
+}
