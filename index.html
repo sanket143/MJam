@@ -4,22 +4,51 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
 
+    <link href="https://fonts.googleapis.com/css?family=Salsa&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <h1>Songs List</h1>
-    <div id="app">
-      <!-- <div v-for="song_tag in song_tags">
-        <h5>{{ song_tag.title }} - <span class="artist">{{ song_tag.artist}}</span> </h5>
-      </div> -->
-      <div v-for="value in artists">
-        <h3>{{ value.artist }}</h3>
-        <ol>
-          <li v-for="song in value.songs">{{ song.title }}</li>
-        </ol>
+    <div class="title-bar">
+      <img src="./assets/mjam-logo.png" width="20px">
+      
+    </div>
+    <div class="body">
+      <div id="top-frame">
+        <div id="sidebar">
+          <h4 class="label">Library</h4>
+          <div class="sidebar-buttons">
+            <a class="sidebar-button">
+              <i class="material-icons">home</i>
+              <span>Home</span>
+            </a>
+            <a class="sidebar-button">
+              <i class="material-icons">list</i>
+              <span>Playlists</span>
+            </a>
+            <a class="sidebar-button">
+              <i class="material-icons">person</i>
+              <span>Artists</span>
+            </a>
+            <a class="sidebar-button">
+              <i class="material-icons">album</i>
+              <span>Albums</span>
+            </a>
+            <a class="sidebar-button">
+              <i class="material-icons">music_note</i>
+              <span>Songs</span>
+            </a>
+            <a class="sidebar-button">
+              <i class="material-icons">settings</i>
+              <span>Settings</span>
+            </a>
+          </div>
+        </div>
+        <div id="content"></div>
+      </div>
+      <div id="bottom-frame">
+        <div id="nowplaying"></div>
       </div>
     </div>
-</ul>
 
     <!-- You can also require other files to run in this process -->
     <script src="./vue.js"></script>
