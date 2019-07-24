@@ -1,6 +1,80 @@
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./assets/Material-Icons.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  vertical-align: middle;
+  -moz-font-feature-settings: 'liga';
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s;
 }
+
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+
+#sidebar {
+  padding-left: 50px;
+}
+
+#sidebar .label {
+  /* Style for "Library" */
+  width: 51px;
+  height: 18px;
+  color: #000000;
+  font-family: Salsa;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+#sidebar .sidebar-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+#sidebar .sidebar-button {
+  margin-bottom: 10px;
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  padding-left: 10px;
+  width: 100px;
+  cursor: pointer;
+}
+
+#sidebar .sidebar-button:hover {
+  border-color: crimson;
+}
+#sidebar .sidebar-button i {
+  font-size: 17px;
+}
+#sidebar .sidebar-button span {
+  width: 47px;
+  height: 18px;
+  color: #000000;
+  font-family: Salsa;
+  font-size: 15px;
+  font-weight: 400;
 }
