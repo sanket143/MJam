@@ -199,8 +199,17 @@ body {
 }
 
 /* Main Frame */
+#content .main-frame .songs-list {
+  display: flex;
+  height: 230px;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+
 #content .main-frame .songs-list .song {
   width: 180px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 #content .songs-list .song-art {

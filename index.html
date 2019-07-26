@@ -63,16 +63,16 @@
           </div>
           <div class="main-frame">
             <h4 class="label">Recently Played</h4>
-            <div class="songs-list">
-              <div class="song">
-                <div class="song-art" style="background-image: url(https://i.scdn.co/image/fe2ea4882d97b90abd325f108b91c9303872ccc4)">
+            <div class="songs-list" id="recent">
+              <div class="song" v-for="song in songs">
+                <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
                   <div class="play-me">
                     <i class="material-icons">play_circle_outline</i>
                   </div>
                 </div>
                 <div class="song-desc">
-                  <h6 class="song-title">I Believe</h6>
-                  <h5 class="song-artist">Jonas Brothers</h5>
+                  <h6 class="song-title">{{ song.title }}</h6>
+                  <h5 class="song-artist">{{ song.artist }}</h5>
                 </div>
 
               </div>
@@ -107,7 +107,7 @@
     <!-- You can also require other files to run in this process -->
     <script src="./const.js"></script>
     <script src="./renderer.js"></script>
-    <script src="./jams.js"></script>
+    <script src="./recent.js"></script>
     <script>
     </script>
 
