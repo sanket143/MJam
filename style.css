@@ -3,6 +3,7 @@ html, body {
   margin: 0;
   color: #353535;
   height: -webkit-fill-available;
+  font-family: Salsa;
 }
 
 @font-face {
@@ -37,6 +38,63 @@ html, body {
   opacity: 0;
 }
 
+.title-bar {
+  padding: 5px;
+  height: 20px;
+  background: #fafafa;
+  display: flex;
+}
+
+.title-bar .brand-logo {
+  cursor: pointer;
+  width: fit-content;
+  margin: 0;
+}
+
+.title-bar .brand-logo > * {
+  vertical-align: middle;
+}
+
+.title-bar .action-buttons {
+  flex: 1;
+  display: inline-flex;
+  justify-content: flex-end;
+}
+
+.title-bar .action-buttons span {
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  border-radius: 50%;
+  color: white;
+  height: 10px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.title-bar .action-buttons .minimize {
+  background: #2acb43;
+  border: 2px solid #2f9e3e;
+  margin-right: 6px;
+}
+
+.title-bar .action-buttons .restore {
+  background: #febf30;
+  border: 2px solid #d6a642;
+  margin-right: 6px;
+}
+
+.title-bar .action-buttons .close {
+  background: #ff6258;
+  border: 2px solid #be605b;
+}
+
+.title-bar .action-buttons .material-icons {
+  font-size: 10px;
+}
+
 #top-frame {
   display: flex;
   flex-direction: row;
@@ -51,7 +109,6 @@ html, body {
   width: 51px;
   height: 18px;
   color: #000000;
-  font-family: Salsa;
   font-size: 15px;
   font-weight: 400;
 }
