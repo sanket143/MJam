@@ -26,13 +26,17 @@
         <div id="sidebar">
           <h4 class="label">Library</h4>
           <div class="sidebar-buttons">
-            <a class="sidebar-button">
+            <a class="sidebar-button active">
               <i class="material-icons">home</i>
               <span>Home</span>
             </a>
             <a class="sidebar-button">
-              <i class="material-icons">list</i>
+              <i class="material-icons">playlist_play</i>
               <span>Playlists</span>
+            </a>
+            <a class="sidebar-button">
+              <i class="material-icons">favorite</i>
+              <span>Loved</span>
             </a>
             <a class="sidebar-button">
               <i class="material-icons">person</i>
@@ -53,7 +57,28 @@
           </div>
         </div>
         <div id="content">
-          <div class="lists">
+          <div class="search-bar">
+            <i class="material-icons">search</i>
+            <input placeholder="Search songs, artists and albums..." type="text" id="search">
+          </div>
+          <div class="main-frame">
+            <h4 class="label">Recently Played</h4>
+            <div class="songs-list">
+              <div class="song">
+                <div class="song-art" style="background-image: url(https://i.scdn.co/image/fe2ea4882d97b90abd325f108b91c9303872ccc4)">
+                  <div class="play-me">
+                    <i class="material-icons">play_circle_outline</i>
+                  </div>
+                </div>
+                <div class="song-desc">
+                  <h6 class="song-title">I Believe</h6>
+                  <h5 class="song-artist">Jonas Brothers</h5>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- <div class="lists">
             <div class="new-jam">
               <div class="head">
                 <h3 class="heading">Jam of the Day</h3>
@@ -70,17 +95,15 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="artist-list">
-
-          </div>
+          </div> -->
         </div>
-      </div>
-      <div id="bottom-frame">
-        <div id="nowplaying"></div>
+        <div id="right-frame"></div>
       </div>
     </div>
 
+    <div id="bottom-frame">
+      <div id="nowplaying"></div>
+    </div>
     <!-- You can also require other files to run in this process -->
     <script src="./const.js"></script>
     <script src="./renderer.js"></script>
