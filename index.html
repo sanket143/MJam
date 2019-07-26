@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
+    <script src="./assets/vue.js"></script>
     <div class="title-bar">
       <h6 class="brand-logo">
         <img src="./assets/mjam-logo.png" width="19px">
@@ -51,7 +52,29 @@
             </a>
           </div>
         </div>
-        <div id="content"></div>
+        <div id="content">
+          <div class="lists">
+            <div class="new-jam">
+              <div class="head">
+                <h3 class="heading">Jam of the Day</h3>
+              </div>
+              <div id="jams" class="jam-list">
+                <div v-for="song in songs" class="jam">
+                  <div class="jam-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }"> </div>
+                  <div class="jam-details">
+                    <div class="jam-left">
+                      <h6 class="jam-title">{{ song.title }}</h6>
+                      <h6 class="jam-artist">{{ song.artist }}</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="artist-list">
+
+          </div>
+        </div>
       </div>
       <div id="bottom-frame">
         <div id="nowplaying"></div>
@@ -59,8 +82,9 @@
     </div>
 
     <!-- You can also require other files to run in this process -->
-    <script src="./vue.js"></script>
+    <script src="./const.js"></script>
     <script src="./renderer.js"></script>
+    <script src="./jams.js"></script>
     <script>
     </script>
 
