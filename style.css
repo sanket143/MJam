@@ -1,6 +1,8 @@
 html, body {
   padding: 0;
   margin: 0;
+  color: #353535;
+  height: -webkit-fill-available;
 }
 
 @font-face {
@@ -35,12 +37,17 @@ html, body {
   opacity: 0;
 }
 
+#top-frame {
+  display: flex;
+  flex-direction: row;
+}
+
 #sidebar {
   padding-left: 50px;
+  padding-right: 22px;
 }
 
 #sidebar .label {
-  /* Style for "Library" */
   width: 51px;
   height: 18px;
   color: #000000;
@@ -67,9 +74,11 @@ html, body {
 #sidebar .sidebar-button:hover {
   border-color: crimson;
 }
+
 #sidebar .sidebar-button i {
   font-size: 17px;
 }
+
 #sidebar .sidebar-button span {
   width: 47px;
   height: 18px;
@@ -77,4 +86,72 @@ html, body {
   font-family: Salsa;
   font-size: 15px;
   font-weight: 400;
+}
+
+#content {
+  padding-left: 40px;
+  border-left: 1px solid #f1eded;
+}
+
+#content .head {
+  padding-left: 30px;
+}
+
+#content .head .heading {
+  text-transform: uppercase;
+}
+
+#content .jam-list .jam {
+  display: flex;
+  transition: 0.2s;
+  cursor: pointer;
+  width: 271px;
+  height: 36px;
+  border-radius: 40px;
+  background-color: #f6f6f6;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+#content .jam-list .jam:hover {
+  box-shadow: 2px 3px 6px 0px #d0c0c3ab;
+  transform: translateY(-2px) translateX(-2px);
+}
+
+#content .jam .jam-art {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background-size: cover;
+  background-color: white;
+}
+
+#content .jam .jam-details {
+  flex: 1;
+  display: inline-flex;
+}
+
+#content .jam .jam-left {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#content .jam .jam-left h6 {
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+#content .jam .jam-left .jam-title {
+  font-size: 13px;
+}
+
+#content .jam .jam-right {
+  flex: 1;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 10px;
 }
