@@ -3,6 +3,7 @@ const jsmediatags = require("jsmediatags");
 const path = require("path");
 const fs = require("fs");
 const HOME = process.env.HOME
+const dest = `${HOME}/Music`;
 
 const getAlbumArt = function(tags){
     const picture = tags.tags.picture;

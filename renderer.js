@@ -23,8 +23,8 @@
 //     })
 // });
 
-// let jams = new Vue({
-//   el: "#jams",
+// let artists = new Vue({
+//   el: "#artists",
 //   data: {
 //     song_tags: [],
 //     artists_index: [],
