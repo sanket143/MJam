@@ -66,7 +66,7 @@
             <div class="songs-list" id="recent">
               <div class="song" v-for="song in songs">
                 <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
-                  <div class="play-me">
+                  <div class="play-me" v-on:click="playMe(song.src)">
                     <i class="material-icons">play_circle_outline</i>
                   </div>
                 </div>
@@ -74,7 +74,6 @@
                   <h6 class="song-title">{{ song.title }}</h6>
                   <h5 class="song-artist">{{ song.artist }}</h5>
                 </div>
-
               </div>
             </div>
           </div>
@@ -105,6 +104,7 @@
       <div id="nowplaying"></div>
     </div>
     <!-- You can also require other files to run in this process -->
+    <script src="./assets/howler.min.js"></script>
     <script src="./const.js"></script>
     <script src="./renderer.js"></script>
     <script src="./recent.js"></script>
