@@ -113,18 +113,18 @@
           </div> 
           <div class="now-playing-controls">
               <button id="prev"><i class="material-icons">skip_previous</i></button>
-              <button id="toggle"><i class="material-icons">pause</i></button>
+              <button id="toggle" v-on:click="toggle()"><i class="material-icons">pause</i></button>
               <button id="next"><i class="material-icons">skip_next</i></button>
           </div>
           <div class="seekbar-wrapper">
               <div class="seekbar-cover">
                   <div class="seekbar">
-                      <div class="progress" style="width: 40%"></div>
-                      <div class="handle" style="margin-left: 40%"></div>
+                      <div class="progress" :style="{ 'width': completion + '%'}"></div>
+                      <div class="handle" :style="{ 'margin-left': completion + '%'}"></div>
                   </div>
               </div>
               <div class="seektime">
-
+                00:00/01:00
               </div>
           </div>
           <div class="now-playing-options">

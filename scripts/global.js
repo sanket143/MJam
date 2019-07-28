@@ -37,6 +37,26 @@ global_args.play = (file_path) => {
 
     nowplaying_frame.song = global_args[file_path];
     global_args.nowplaying.play();
+
+    global_args.nowplaying.on("play", function(){
+        global_args.nowplaying_tracker = setInterval(function(){
+            nowplaying_frame.completion = 
+            global_args.nowplaying.seek() * 1000 / (global_args.nowplaying.duration() * 10);
+
+        }, 100)
+    })
+
+    global_args.nowplaying.on("stop", function(){
+        clearInterval(global_args.nowplaying_tracker);
+    })
+
+    global_args.nowplaying.on("end", function(){
+        clearInterval(global_args.nowplaying_tracker);
+    })
+
+    global_args.nowplaying.on("seek", function(item){
+        console.log(item);
+    })
 }
 
 global_args.getTags = (file_path) => {
