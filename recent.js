@@ -1,18 +1,8 @@
-fs.readdir(dest, function(err, files){
-    for(let i = 0; i < files.length; i++){
-        file = files[i];
-        if(path.extname(file) == ".mp3"){
-            recent.songs_src.push(`${dest}/${file}`);
-            jsmediatags.read(`${dest}/${file}`, {
-                onSuccess: function(tag){
-                    let ret = recent.reach;
-                    tag.tags.picture.data = getAlbumArt(tag);
-                    tag.tags.src = recent.songs_src[ret];
-                    recent.songs.push(tag.tags);
-                    recent.reach++;
-                }
-            });
-        }
+global_args.getFiles.then((files) => {
+    for(i = 0; i < files.length; i++){
+        global_args.getTags(files[i]).then((tags) => {
+            recent.songs.push(tags);
+        })
     }
 });
 
@@ -25,16 +15,15 @@ let recent = new Vue({
     },
     methods: {
         playMe: function(src){
-            let song = new Howl({
+            if(global_args.current){
+                global_args.current.stop();
+            }
+
+            global_args.current = new Howl({
                 src: [src]
             });
 
-            song.play();
+            global_args.current.play();
         }
     }
 })
-
-// let song = new Howl({
-//     src: [src]
-// })
-// song.play();
