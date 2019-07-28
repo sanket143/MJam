@@ -19,15 +19,7 @@ let content_frame = new Vue({
     },
     methods: {
         playMe: function(src){
-            if(global_args.current){
-                global_args.current.stop();
-            }
-
-            global_args.current = new Howl({
-                src: [src]
-            });
-
-            global_args.current.play();
+            global_args.play(src);
         },
         updateFrame: function(frame){
             this.frame = frame;

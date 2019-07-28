@@ -5,7 +5,11 @@ const fs = require("fs");
 const HOME = process.env.HOME
 const dest = `${HOME}/Music`;
 
-let global_args = { dest: `${HOME}/Music` }
+let global_args = {
+    dest: `${HOME}/Music`,
+    nowplaying_src: false,
+    computed_tags: {}
+}
 
 global_args.getFiles = new Promise((resolve, reject) => {
     fs.readdir(global_args.dest, function(err, files){
@@ -21,15 +25,34 @@ global_args.getFiles = new Promise((resolve, reject) => {
     });
 });
 
+global_args.play = (file_path) => {
+    if(global_args.nowplaying){
+        global_args.nowplaying.stop();
+    }
+
+    global_args.nowplaying_src = file_path;
+    global_args.nowplaying = new Howl({
+        src: [file_path]
+    })
+
+    nowplaying_frame.song = global_args[file_path];
+    global_args.nowplaying.play();
+}
+
 global_args.getTags = (file_path) => {
     return new Promise((resolve, reject) => {
-        jsmediatags.read(file_path, {
-            onSuccess: function(tag){
-                tag.tags.picture.data = getAlbumArt(tag);
-                tag.tags.src = file_path;
-                resolve(tag.tags);
-            }
-        });
+        if(global_args.computed_tags[file_path]){
+            resolve(global_args.computed_tags[file_path]);
+        } else {
+            jsmediatags.read(file_path, {
+                onSuccess: function(tag){
+                    tag.tags.picture.data = getAlbumArt(tag);
+                    tag.tags.src = file_path;
+                    global_args[file_path] = tag.tags;
+                    resolve(tag.tags);
+                }
+            });
+        }
     });
 } 
 

@@ -9,7 +9,7 @@ html, body {
 body {
   display: grid;
   height: 100vh;
-  grid-template-rows: 30px auto 100px;
+  grid-template-rows: 30px auto 80px;
 }
 
 @font-face {
@@ -203,9 +203,12 @@ body {
 }
 
 /* Main Frame */
+#content .main-frame #recent-home-section {
+  height: 230px;
+}
+
 #content .main-frame .songs-list {
   display: flex;
-  /* height: 230px */
   flex-wrap: wrap;
   overflow: hidden;
 }

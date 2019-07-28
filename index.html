@@ -6,6 +6,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Salsa&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./stylesheets/nowplaying.css">
   </head>
   <body>
     <script src="./scripts/vue.js"></script>
@@ -101,13 +102,45 @@
     </div>
 
     <div id="bottom-frame">
-      <div id="nowplaying"></div>
+      <div id="nowplaying" v-show="song != ''">
+        <div class="now-playing-wrapper">
+          <div class="now-playing-track">
+              <div class="now-playing-art" :style="{'background-image': 'url(' + song.picture.data + ')'}"></div>
+              <div class="now-playing-details">
+                  <h5 class="now-playing-track-title">{{ song.title }}</h5>
+                  <h6 class="now-playing-track-artist">{{ song.artist }}</h6>
+              </div>
+          </div> 
+          <div class="now-playing-controls">
+              <button id="prev"><i class="material-icons">skip_previous</i></button>
+              <button id="toggle"><i class="material-icons">pause</i></button>
+              <button id="next"><i class="material-icons">skip_next</i></button>
+          </div>
+          <div class="seekbar-wrapper">
+              <div class="seekbar-cover">
+                  <div class="seekbar">
+                      <div class="progress" style="width: 40%"></div>
+                      <div class="handle" style="margin-left: 40%"></div>
+                  </div>
+              </div>
+              <div class="seektime">
+
+              </div>
+          </div>
+          <div class="now-playing-options">
+              <button id="repeat"><i class="material-icons">repeat</i></button>
+              <button id="shuffle"><i class="material-icons">shuffle</i></button>
+              <button id="volume"><i class="material-icons">volume_up</i></button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/global.js"></script>
-    <script src="scripts/frame.js"></script>
-    <script src="scripts/sidebar.js"></script>
+    <script src="./scripts/frame.js"></script>
+    <script src="./scripts/sidebar.js"></script>
+    <script src="./scripts/nowplaying.js"></script>
 
   </body>
 </html>
