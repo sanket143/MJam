@@ -113,7 +113,8 @@
           </div> 
           <div class="now-playing-controls">
               <button id="prev"><i class="material-icons">skip_previous</i></button>
-              <button id="toggle" v-on:click="toggle()"><i class="material-icons">pause</i></button>
+              <button id="toggle" v-if="!paused" v-on:click="pause()"><i class="material-icons">pause</i></button>
+              <button id="toggle" v-else v-on:click="play()"><i class="material-icons">play_arrow</i></button>
               <button id="next"><i class="material-icons">skip_next</i></button>
           </div>
           <div class="seekbar-wrapper">

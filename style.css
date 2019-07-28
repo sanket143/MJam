@@ -12,6 +12,10 @@ body {
   grid-template-rows: 30px auto 80px;
 }
 
+button {
+  outline: none;
+}
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;

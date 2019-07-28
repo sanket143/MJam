@@ -47,10 +47,12 @@ global_args.play = (file_path) => {
     })
 
     global_args.nowplaying.on("stop", function(){
+        nowplaying_frame.paused = true;
         clearInterval(global_args.nowplaying_tracker);
     })
 
     global_args.nowplaying.on("end", function(){
+        nowplaying_frame.paused = true;
         clearInterval(global_args.nowplaying_tracker);
     })
 
