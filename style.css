@@ -90,6 +90,7 @@ button {
 }
 
 .title-bar .song-title {
+  font-family: 'Source Sans Pro', sans-serif;
   flex: 1;
   line-height: 20px;
   margin: 0;

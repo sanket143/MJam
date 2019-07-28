@@ -44,11 +44,10 @@ global_args.play = (file_path) => {
     global_args.nowplaying.play();
 
     global_args.nowplaying.on("play", function(){
+        nowplaying_frame.paused = false;
         global_args.nowplaying_tracker = setInterval(function(){
-            nowplaying_frame.paused = false;
             nowplaying_frame.completion = 
             global_args.nowplaying.seek() * 1000 / (global_args.nowplaying.duration() * 10);
-
         }, 100)
     })
 

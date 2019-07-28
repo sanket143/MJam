@@ -7,6 +7,7 @@
   background-color: white;
 }
 .now-playing-wrapper .now-playing-track {
+  flex: 1;
   height: 100%;
   display: inline-flex;
   align-items: center;
@@ -101,8 +102,15 @@
 .now-playing-wrapper .now-playing-options {
   margin: 0 10px;
   display: flex;
+  flex: 1;
   align-items: center;
+  justify-content: flex-end;
 }
+
+.now-playing-wrapper .now-playing-options .active {
+  color: #eb6d7f;
+}
+
 .now-playing-wrapper .now-playing-options button {
   background: transparent;
   border: none;

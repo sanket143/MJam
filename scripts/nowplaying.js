@@ -3,6 +3,7 @@ let nowplaying_frame = new Vue({
     data: {
         song: '',
         paused: false,
+        repeat: false,
         completion: 0
     },
     methods: {
@@ -13,6 +14,10 @@ let nowplaying_frame = new Vue({
         play: function(){
             global_args.nowplaying.play();
             this.paused = false;
+        },
+        toggleRepeat: function(){
+            this.repeat = !this.repeat;
+            global_args.nowplaying.loop(this.repeat);
         }
     }
 })
