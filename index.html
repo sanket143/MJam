@@ -15,6 +15,7 @@
         <img src="./assets/mjam-logo.png" width="19px">
         <span>MJam</span>
       </h6>
+      <h6 class="song-title">{{ title }}</h6>
 
       <div class="action-buttons">
         <span class="minimize"><i class="material-icons">remove</i></span>
@@ -103,6 +104,14 @@
 
     <div id="bottom-frame">
       <div id="nowplaying" v-show="song != ''">
+        <div class="seekbar-wrapper">
+            <div class="seekbar-cover">
+                <div class="seekbar">
+                    <div class="progress" :style="{ 'width': completion + '%'}"></div>
+                    <div class="handle" :style="{ 'margin-left': completion + '%'}"></div>
+                </div>
+            </div>
+        </div>
         <div class="now-playing-wrapper">
           <div class="now-playing-track">
               <div class="now-playing-art" :style="{'background-image': 'url(' + song.picture.data + ')'}"></div>
@@ -113,20 +122,9 @@
           </div> 
           <div class="now-playing-controls">
               <button id="prev"><i class="material-icons">skip_previous</i></button>
-              <button id="toggle" v-if="!paused" v-on:click="pause()"><i class="material-icons">pause</i></button>
-              <button id="toggle" v-else v-on:click="play()"><i class="material-icons">play_arrow</i></button>
+              <button id="toggle" v-if="!paused" v-on:click="pause()"><i class="material-icons">pause_circle_filled</i></button>
+              <button id="toggle" v-else v-on:click="play()"><i class="material-icons">play_circle_filled</i></button>
               <button id="next"><i class="material-icons">skip_next</i></button>
-          </div>
-          <div class="seekbar-wrapper">
-              <div class="seekbar-cover">
-                  <div class="seekbar">
-                      <div class="progress" :style="{ 'width': completion + '%'}"></div>
-                      <div class="handle" :style="{ 'margin-left': completion + '%'}"></div>
-                  </div>
-              </div>
-              <div class="seektime">
-                00:00/01:00
-              </div>
           </div>
           <div class="now-playing-options">
               <button id="repeat"><i class="material-icons">repeat</i></button>

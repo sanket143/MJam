@@ -89,8 +89,15 @@ button {
   vertical-align: middle;
 }
 
-.title-bar .action-buttons {
+.title-bar .song-title {
   flex: 1;
+  line-height: 20px;
+  margin: 0;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.title-bar .action-buttons {
   display: inline-flex;
   justify-content: flex-end;
 }

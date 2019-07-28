@@ -35,7 +35,7 @@ global_args.play = (file_path) => {
         src: [file_path]
     })
 
-    nowplaying_frame.song = global_args[file_path];
+    nowplaying_frame.song = global_args.computed_tags[file_path];
     global_args.nowplaying.play();
 
     global_args.nowplaying.on("play", function(){
@@ -47,11 +47,13 @@ global_args.play = (file_path) => {
     })
 
     global_args.nowplaying.on("stop", function(){
+        nowplaying_frame.completion = 0;
         nowplaying_frame.paused = true;
         clearInterval(global_args.nowplaying_tracker);
     })
 
     global_args.nowplaying.on("end", function(){
+        nowplaying_frame.completion = 0;
         nowplaying_frame.paused = true;
         clearInterval(global_args.nowplaying_tracker);
     })
@@ -70,7 +72,7 @@ global_args.getTags = (file_path) => {
                 onSuccess: function(tag){
                     tag.tags.picture.data = getAlbumArt(tag);
                     tag.tags.src = file_path;
-                    global_args[file_path] = tag.tags;
+                    global_args.computed_tags[file_path] = tag.tags;
                     resolve(tag.tags);
                 }
             });
