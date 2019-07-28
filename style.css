@@ -161,7 +161,7 @@ body {
   cursor: pointer;
 }
 
-#sidebar .sidebar-button.active {
+#sidebar .sidebar-button.is-active {
   color: #eb6d7f;
 }
 

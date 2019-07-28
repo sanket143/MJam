@@ -26,31 +26,31 @@
         <div id="sidebar">
           <h4 class="label">Library</h4>
           <div class="sidebar-buttons">
-            <a class="sidebar-button active">
+            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'home'}" v-on:click="updateFrame('home')">
               <i class="material-icons">home</i>
               <span>Home</span>
             </a>
-            <a class="sidebar-button">
+            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'playlists'}" v-on:click="updateFrame('playlists')">
               <i class="material-icons">playlist_play</i>
               <span>Playlists</span>
             </a>
-            <a class="sidebar-button">
+            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'loved'}" v-on:click="updateFrame('loved')">
               <i class="material-icons">favorite</i>
               <span>Loved</span>
             </a>
-            <a class="sidebar-button">
+            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'artists'}" v-on:click="updateFrame('artists')">
               <i class="material-icons">person</i>
               <span>Artists</span>
             </a>
-            <a class="sidebar-button">
+            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'albums'}" v-on:click="updateFrame('albums')">
               <i class="material-icons">album</i>
               <span>Albums</span>
             </a>
-            <a class="sidebar-button">
+            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'songs'}" v-on:click="updateFrame('songs')">
               <i class="material-icons">music_note</i>
               <span>Songs</span>
             </a>
-            <a class="sidebar-button">
+            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'settings'}" v-on:click="updateFrame('settings')">
               <i class="material-icons">settings</i>
               <span>Settings</span>
             </a>
@@ -62,17 +62,35 @@
             <input placeholder="Search songs, artists and albums..." type="text" id="search">
           </div>
           <div class="main-frame">
-            <h4 class="label">Recently Played</h4>
-            <div class="songs-list" id="recent">
-              <div class="song" v-for="song in songs">
-                <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
-                  <div class="play-me" v-on:click="playMe(song.src)">
-                    <i class="material-icons">play_circle_outline</i>
+            <div v-if="frame == 'home'">
+              <h4 class="label">Recently Played</h4>
+              <div class="songs-list" id="recent-home-section">
+                <div class="song" v-for="song in recent_songs">
+                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
+                    <div class="play-me" v-on:click="playMe(song.src)">
+                      <i class="material-icons">play_circle_outline</i>
+                    </div>
+                  </div>
+                  <div class="song-desc">
+                    <h6 class="song-title">{{ song.title }}</h6>
+                    <h5 class="song-artist">{{ song.artist }}</h5>
                   </div>
                 </div>
-                <div class="song-desc">
-                  <h6 class="song-title">{{ song.title }}</h6>
-                  <h5 class="song-artist">{{ song.artist }}</h5>
+              </div>
+            </div>
+            <div v-else-if="frame == 'songs'">
+              <h4 class="label">Songs</h4>
+              <div class="songs-list" id="songs-section">
+                <div class="song" v-for="song in all_songs">
+                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
+                    <div class="play-me" v-on:click="playMe(song.src)">
+                      <i class="material-icons">play_circle_outline</i>
+                    </div>
+                  </div>
+                  <div class="song-desc">
+                    <h6 class="song-title">{{ song.title }}</h6>
+                    <h5 class="song-artist">{{ song.artist }}</h5>
+                  </div>
                 </div>
               </div>
             </div>
@@ -88,7 +106,8 @@
 
     <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/global.js"></script>
-    <script src="./scripts/recent.js"></script>
+    <script src="scripts/frame.js"></script>
+    <script src="scripts/sidebar.js"></script>
 
   </body>
 </html>
