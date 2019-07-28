@@ -36,6 +36,11 @@ global_args.play = (file_path) => {
     })
 
     nowplaying_frame.song = global_args.computed_tags[file_path];
+    title_frame.song = {
+        title: nowplaying_frame.song.title,
+        artist: nowplaying_frame.song.artist
+    }
+
     global_args.nowplaying.play();
 
     global_args.nowplaying.on("play", function(){
