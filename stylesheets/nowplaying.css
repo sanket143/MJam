@@ -1,0 +1,126 @@
+.now-playing-wrapper {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  height: 80px;
+  background-color: white;
+}
+.now-playing-wrapper .now-playing-track {
+  flex: 1;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+}
+.now-playing-wrapper .now-playing-track .now-playing-art {
+  width: 50px;
+  height: 50px;
+  background-image: url(../assets/mjam-logo.png);
+  background-size: cover;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin: 0 10px;
+}
+.now-playing-wrapper .now-playing-track .now-playing-details .now-playing-track-title, .now-playing-wrapper .now-playing-track .now-playing-details .now-playing-track-artist {
+  margin: 0;
+}
+
+.now-playing-wrapper .now-playing-track .now-playing-details .now-playing-track-title {
+    color: black;
+}
+
+.now-playing-wrapper .now-playing-track .now-playing-details .now-playing-track-artist {
+    color: dimgrey;
+}
+
+.now-playing-wrapper .now-playing-controls {
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+.now-playing-wrapper .now-playing-controls button {
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  margin: 0 2px;
+  border-radius: 50%;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.now-playing-wrapper .now-playing-controls button:hover {
+  box-shadow: 0px 0px 8px white;
+}
+
+.now-playing-controls #toggle .material-icons {
+    font-size: 34px;
+}
+#nowplaying .seekbar-wrapper {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  position: fixed;
+  bottom: 74px;
+  z-index: 1;
+}
+#nowplaying .seekbar-wrapper .seekbar-cover {
+  width: 100%;
+  height: 14px;
+  cursor: pointer;
+  background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+}
+.seekbar-wrapper .seekbar {
+  height: 3px;
+  width: 100%;
+  background-color: #ebebeb;
+}
+.seekbar-wrapper .progress {
+  transition: 0.2s;
+  height: 3px;
+  width: 20%;
+  background-color: #eb6d7f;
+}
+.seekbar-wrapper .handle {
+  transition: 0.2s;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  margin-left: 20%;
+  background-color: #eb6d7f;
+  margin-top: -9px;
+  transform: translateX(-7px);
+}
+
+.seekbar-wrapper .seektime {
+    margin-left: 10px;
+}
+.now-playing-wrapper .now-playing-options {
+  margin: 0 10px;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.now-playing-wrapper .now-playing-options .active {
+  color: #eb6d7f;
+}
+
+.now-playing-wrapper .now-playing-options button {
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  margin: 0 2px;
+  border-radius: 50%;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.now-playing-wrapper .now-playing-options button:hover {
+  box-shadow: 0px 0px 8px white;
+}

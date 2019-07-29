@@ -9,7 +9,11 @@ html, body {
 body {
   display: grid;
   height: 100vh;
-  grid-template-rows: 30px auto 100px;
+  grid-template-rows: 30px auto 80px;
+}
+
+button {
+  outline: none;
 }
 
 @font-face {
@@ -85,8 +89,16 @@ body {
   vertical-align: middle;
 }
 
-.title-bar .action-buttons {
+.title-bar .song-title {
+  font-family: 'Source Sans Pro', sans-serif;
   flex: 1;
+  line-height: 20px;
+  margin: 0;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.title-bar .action-buttons {
   display: inline-flex;
   justify-content: flex-end;
 }
@@ -161,7 +173,7 @@ body {
   cursor: pointer;
 }
 
-#sidebar .sidebar-button.active {
+#sidebar .sidebar-button.is-active {
   color: #eb6d7f;
 }
 
@@ -203,9 +215,12 @@ body {
 }
 
 /* Main Frame */
+#content .main-frame #recent-home-section {
+  height: 230px;
+}
+
 #content .main-frame .songs-list {
   display: flex;
-  /* height: 230px */
   flex-wrap: wrap;
   overflow: hidden;
 }
