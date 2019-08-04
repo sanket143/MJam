@@ -341,5 +341,19 @@ button {
 #right-frame {
   height: 100%;
   width: 100%;
-  background-color: grey;
+  padding: 10px;
+}
+
+#right-frame .artist-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#right-frame .artist-item .artist-art {
+  width: 60px;
+  height: 60px;
+  background-size: contain;
+  border-radius: 50%;
+  margin-right: 10px;
 }
