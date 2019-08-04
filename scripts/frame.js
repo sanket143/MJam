@@ -43,3 +43,16 @@ let title_frame = new Vue({
         }
     }
 })
+
+let right_frame = new Vue({
+    el: "#right-frame",
+    data: {
+        artist_songs_sy: {},
+        artists: []
+    },
+    computed: {
+        artist_songs: function(){
+            return this.artist_songs_sy;
+        }
+    }
+})

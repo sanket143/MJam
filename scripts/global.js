@@ -8,6 +8,7 @@ const dest = `${HOME}/Music`;
 let global_args = {
     dest: `${HOME}/Music`,
     nowplaying_src: false,
+    artists: [],
     computed_tags: {}
 }
 
@@ -77,6 +78,14 @@ global_args.getTags = (file_path) => {
                 onSuccess: function(tag){
                     tag.tags.picture.data = getAlbumArt(tag);
                     tag.tags.src = file_path;
+                    if(global_args.artists[tag.tags.artist]){
+                        global_args.artists[tag.tags.artist].push(tag.tags);
+                        right_frame.artist_songs[tag.tags.artist].push(tag.tags);
+                    } else {
+                        global_args.artists[tag.tags.artist] = [tag.tags];
+                        right_frame.artist_songs[tag.tags.artist] = [tag.tags];
+                        right_frame.artists.push(tag.tags.artist);
+                    }
                     global_args.computed_tags[file_path] = tag.tags;
                     resolve(tag.tags);
                 }
