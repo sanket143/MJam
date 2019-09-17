@@ -72,7 +72,7 @@
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist">{{ song.artist }}</h5>
+                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtists(song.artist)">{{ song.artist }}</h5>
                   </div>
                 </div>
               </transition-group>
@@ -91,7 +91,7 @@
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist">{{ song.artist }}</h5>
+                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtists(song.artist)">{{ song.artist }}</h5>
                   </div>
                 </div>
               </div>
@@ -110,7 +110,7 @@
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist">{{ song.artist }}</h5>
+                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtists(song.artist)">{{ song.artist }}</h5>
                   </div>
                 </div>
               </div>

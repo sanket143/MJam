@@ -19,7 +19,7 @@ let content_frame = new Vue({
         frame: 'home',
         all_songs: [],
         recent_songs: [],
-        artist: "",
+        artist: [],
         current: ""
     },
     methods: {
@@ -39,6 +39,30 @@ let content_frame = new Vue({
         },
         updateFrame: function(frame){
             this.frame = frame;
+        },
+        showArtists: function(artists){
+            artists_list = artists.split(",");
+            songs = [];
+            console.log(artists_list);
+            this.artist = {
+                name: artists,
+                songs: right_frame.artist_songs[artists_list[0].trim()]
+            }
+
+            song_list = [];
+            for(let i = 0; i < this.artist.songs.length; i++){
+                song_list.push(this.artist.songs[i].src);
+            }
+
+            for(let i = 1; i < artists_list.length; i++){
+                songs = right_frame.artist_songs[artists_list[i].trim()];
+                for(let j = 0; j < songs.length; j++){
+                    if(song_list.indexOf(songs[j].src) == -1){
+                        this.artist.songs.push(songs[j]);
+                        song_list.push(songs[j].src);
+                    }
+                }
+            }
         }
     }
 })
@@ -67,7 +91,7 @@ let right_frame = new Vue({
         artists: []
     },
     computed: {
-        artist_songs: function(artist){
+        artist_songs: function(){
             return this.artist_songs_sy;
         }
     },
@@ -76,7 +100,6 @@ let right_frame = new Vue({
             content_frame.frame = frame;
         },
         showArtist: function(artist){
-            console.log(artist);
             content_frame.artist = {
                 name: artist,
                 songs: this.artist_songs[artist]
