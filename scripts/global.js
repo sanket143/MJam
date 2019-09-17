@@ -141,15 +141,17 @@ global_args.updateRecent = (tags) => {
             }
             if(gotcha == -1){
                 jsonObj.unshift(tags);
+                content_frame.recent_songs.unshift(tags);
                 if(jsonObj.length > 10){
                     jsonObj.pop();
+                    content_frame.recent_songs.pop();
                 }
             } else {
                 jsonObj.splice(gotcha, 1);
+                content_frame.recent_songs.splice(gotcha, 1);
                 jsonObj.unshift(tags);
+                content_frame.recent_songs.unshift(tags);
             }
-
-            content_frame.recent_songs = jsonObj;
 
             fs.writeFile(`.user/recent.json`, JSON.stringify(jsonObj), function(err){
                 if(err){
