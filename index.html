@@ -61,10 +61,13 @@
             <div v-if="frame == 'home'">
               <h4 class="label">Recently Played</h4>
               <transition-group name="list-complete" tag="div" class="songs-list" id="recent-home-section">
-                <div class="song list-complete-item" v-for="song in recent_songs" v-bind:key="song">
+                <div class="song list-complete-item" v-for="song in recent_songs" v-bind:key="song.src">
                   <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
-                    <div class="play-me" v-on:click="playMe(song.src)">
+                    <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
+                    </div>
+                    <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
+                      <i class="material-icons">pause_circle_outline</i>
                     </div>
                   </div>
                   <div class="song-desc">
@@ -79,8 +82,30 @@
               <div class="songs-list" id="songs-section">
                 <div class="song" v-for="song in all_songs">
                   <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
-                    <div class="play-me" v-on:click="playMe(song.src)">
+                    <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
+                    </div>
+                    <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
+                      <i class="material-icons">pause_circle_outline</i>
+                    </div>
+                  </div>
+                  <div class="song-desc">
+                    <h6 class="song-title">{{ song.title }}</h6>
+                    <h5 class="song-artist">{{ song.artist }}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-else-if="frame == 'artist'">
+              <h4 class="label">{{ artist.name }}</h4>
+              <div class="songs-list" id="songs-section">
+                <div class="song" v-for="song in artist.songs">
+                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
+                    <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
+                      <i class="material-icons">play_circle_outline</i>
+                    </div>
+                    <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
+                      <i class="material-icons">pause_circle_outline</i>
                     </div>
                   </div>
                   <div class="song-desc">
@@ -97,7 +122,7 @@
             <h4>Artists</h4>
             <div class="artist-list">
               <div class="artist-item" v-for="artist in artists">
-                <div class="artist-name"> {{ artist }} </div>
+                <div class="artist-name" v-on:click="updateFrame('artist');showArtist(artist)"> {{ artist }} </div>
               </div>
             </div>
           </div>

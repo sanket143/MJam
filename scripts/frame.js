@@ -18,12 +18,24 @@ let content_frame = new Vue({
     data: {
         frame: 'home',
         all_songs: [],
-        recent_songs: []
+        recent_songs: [],
+        artist: "",
+        current: ""
     },
     methods: {
         playMe: function(src){
-            global_args.load(src);
-            global_args.nowplaying.play();
+            if(global_args.nowplaying_src != src){
+                global_args.load(src);
+                global_args.nowplaying.play();
+            } else {
+                global_args.nowplaying.play();
+            }
+
+            this.current = src;
+        },
+        pauseMe: function(){
+            global_args.nowplaying.pause();
+            this.current = "";
         },
         updateFrame: function(frame){
             this.frame = frame;
@@ -55,8 +67,20 @@ let right_frame = new Vue({
         artists: []
     },
     computed: {
-        artist_songs: function(){
+        artist_songs: function(artist){
             return this.artist_songs_sy;
+        }
+    },
+    methods: {
+        updateFrame: function(frame){
+            content_frame.frame = frame;
+        },
+        showArtist: function(artist){
+            console.log(artist);
+            content_frame.artist = {
+                name: artist,
+                songs: this.artist_songs[artist]
+            }
         }
     }
 })

@@ -93,13 +93,18 @@ global_args.getTags = (file_path) => {
                         data: getAlbumArt(tag)
                     }
                     tag.tags.src = file_path;
-                    if(global_args.artists[tag.tags.artist]){
-                        global_args.artists[tag.tags.artist].push(tag.tags);
-                        right_frame.artist_songs[tag.tags.artist].push(tag.tags);
-                    } else {
-                        global_args.artists[tag.tags.artist] = [tag.tags];
-                        right_frame.artist_songs[tag.tags.artist] = [tag.tags];
-                        right_frame.artists.push(tag.tags.artist);
+                    let artists = tag.tags.artist.split(",");
+                    for(i = 0; i < artists.length; i++){
+                        artist_name = artists[i].trim();
+
+                        if(global_args.artists[artist_name]){
+                            global_args.artists[artist_name].push(tag.tags);
+                            right_frame.artist_songs[artist_name].push(tag.tags);
+                        } else {
+                            global_args.artists[artist_name] = [tag.tags];
+                            right_frame.artist_songs[artist_name] = [tag.tags];
+                            right_frame.artists.push(artist_name);
+                        }
                     }
                     global_args.computed_tags[file_path] = tag.tags;
                     resolve(tag.tags);
