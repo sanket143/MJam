@@ -1,7 +1,6 @@
 global_args.getFiles.then((files) => {
     for(i = 0; i < files.length; i++){
         global_args.getTags(files[i]).then((tags) => {
-            console.log(tags);
             content_frame.all_songs.push(tags);
         })
     }

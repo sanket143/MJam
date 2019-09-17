@@ -98,24 +98,40 @@ global_args.getTags = (file_path) => {
     });
 }
 
+// Get recent.json
+global_args.getRecent = () => {
+    if(fs.existsSync('.user/recent.json')){
+        fs.readFile('.user/recent.json', (err, data) => {
+            global_args.recent_songs = JSON.parse(data.toString());
+        })
+    } else {
+
+    }
+}
+
 // Updates recent.json
 global_args.updateRecent = (tags) => {
     if(fs.existsSync('.user/recent.json')){
         fs.readFile('.user/recent.json', (err, data) => {
             jsonObj = JSON.parse(data.toString());
-            if(jsonObj.indexOf(JSON.parse(JSON.stringify(tags))) == -1){
+            
+            tags = (({title, album, artist, picture, src}) => ({title, album, artist, picture, src}))(tags);
+
+            gotcha = -1;
+            for(i = 0; i < jsonObj.length; i++){
+                if(JSON.stringify(jsonObj[i]) === JSON.stringify(tags)){
+                    gotcha = i;
+                }
+            }
+            if(gotcha == -1){
                 jsonObj.unshift(tags);
                 if(jsonObj.length > 10){
                     jsonObj.pop();
-                    console.log("In if");
                 }
             } else {
-                jsonObj.splice(jsonObj.indexOf(tags), 1);
+                jsonObj.splice(gotcha, 1);
                 jsonObj.unshift(tags);
-                console.log(jsonObj);
             }
-
-            console.log(jsonObj);
 
             fs.writeFile(`.user/recent.json`, JSON.stringify(jsonObj), function(err){
                 if(err){
@@ -128,7 +144,8 @@ global_args.updateRecent = (tags) => {
             if(err){
                 console.log(err);
             } else {
-                jsonObj = JSON.stringify(tags);
+                data = (({title, album, artist, picture, src}) => ({title, album, artist, picture, src}))(tags);
+                jsonObj = JSON.stringify(data);
                 fs.writeFile(`.user/recent.json`, `[${jsonObj}]`, (err) => {
                     if(err){
                         console.log(err);

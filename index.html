@@ -42,10 +42,6 @@
               <i class="material-icons">favorite</i>
               <span>Loved</span>
             </a>
-            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'artists'}" v-on:click="updateFrame('artists')">
-              <i class="material-icons">person</i>
-              <span>Artists</span>
-            </a>
             <a class="sidebar-button" v-bind:class="{'is-active': frame === 'albums'}" v-on:click="updateFrame('albums')">
               <i class="material-icons">album</i>
               <span>Albums</span>
@@ -140,6 +136,7 @@
           <div class="now-playing-options">
               <input type="range" min="0" max="100" value="50" class="volume-tweak" id="volume">
               <button id="volume"><i class="material-icons">volume_up</i></button>
+              <button id="loved"><i class="material-icons">favorite</i></button>
               <button id="repeat" :class="{active: repeat}" v-on:click="toggleRepeat()"><i class="material-icons">repeat</i></button>
               <button id="shuffle"><i class="material-icons">shuffle</i></button>
           </div>
