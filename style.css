@@ -16,6 +16,16 @@ button {
   outline: none;
 }
 
+/* latin */
+@font-face {
+  font-family: 'Salsa';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Salsa-Regular'), url(./assets/fonts/Salsa.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -72,17 +82,17 @@ button {
 }
 
 .title-bar {
-  padding: 5px;
-  height: 20px;
   background: #fafafa;
   display: flex;
   font-family: Salsa, sans-serif;
+  position: fixed;
+  width: 100vw;
 }
 
 .title-bar .brand-logo {
   cursor: pointer;
   width: fit-content;
-  margin: 0;
+  margin: 5px;
 }
 
 .title-bar .brand-logo > * {
@@ -92,6 +102,7 @@ button {
 .title-bar .song-title {
   font-family: 'Source Sans Pro', sans-serif;
   flex: 1;
+  -webkit-app-region: drag;
   line-height: 20px;
   margin: 0;
   vertical-align: middle;
@@ -99,6 +110,7 @@ button {
 }
 
 .title-bar .action-buttons {
+  margin: 5px;
   display: inline-flex;
   justify-content: flex-end;
 }
@@ -223,6 +235,8 @@ button {
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
+  overflow-y: scroll;
+  height: calc(100vh - 80px - 148px);
 }
 
 #content .main-frame .songs-list .song {
@@ -341,7 +355,12 @@ button {
 #right-frame {
   height: 100%;
   width: 100%;
-  padding: 10px;
+  padding-left: 0;
+}
+
+#right-frame .artist-list {
+  height: calc(100vh - 80px - 94px);
+  overflow-y: scroll;
 }
 
 #right-frame .artist-item {
