@@ -5,6 +5,7 @@ const fs = require("fs");
 const HOME = process.env.HOME
 const dest = `${HOME}/Music`;
 
+// Globally used and available;
 let global_args = {
     dest: `${HOME}/Music`,
     nowplaying_src: false,
@@ -42,6 +43,8 @@ global_args.play = (file_path) => {
         artist: nowplaying_frame.song.artist
     }
 
+    global_args.updateRecent(nowplaying_frame.song);
+
     global_args.nowplaying.play();
 
     global_args.nowplaying.on("play", function(){
@@ -69,6 +72,7 @@ global_args.play = (file_path) => {
     })
 }
 
+// get tags
 global_args.getTags = (file_path) => {
     return new Promise((resolve, reject) => {
         if(global_args.computed_tags[file_path]){
@@ -92,7 +96,48 @@ global_args.getTags = (file_path) => {
             });
         }
     });
-} 
+}
+
+// Updates recent.json
+global_args.updateRecent = (tags) => {
+    if(fs.existsSync('.user/recent.json')){
+        fs.readFile('.user/recent.json', (err, data) => {
+            jsonObj = JSON.parse(data.toString());
+            if(jsonObj.indexOf(JSON.parse(JSON.stringify(tags))) == -1){
+                jsonObj.unshift(tags);
+                if(jsonObj.length > 10){
+                    jsonObj.pop();
+                    console.log("In if");
+                }
+            } else {
+                jsonObj.splice(jsonObj.indexOf(tags), 1);
+                jsonObj.unshift(tags);
+                console.log(jsonObj);
+            }
+
+            console.log(jsonObj);
+
+            fs.writeFile(`.user/recent.json`, JSON.stringify(jsonObj), function(err){
+                if(err){
+                    console.log(err);
+                }
+            });
+        })
+    } else {
+        fs.mkdir('.user/', { recursive: true }, (err) => {
+            if(err){
+                console.log(err);
+            } else {
+                jsonObj = JSON.stringify(tags);
+                fs.writeFile(`.user/recent.json`, `[${jsonObj}]`, (err) => {
+                    if(err){
+                        console.log(err);
+                    }
+                });
+            }
+        });
+    }
+}
 
 const getAlbumArt = function(tags){
     const picture = tags.tags.picture;

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>MJAM - Modern MP3 Player</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Salsa&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./stylesheets/nowplaying.css">
   </head>
@@ -22,6 +21,9 @@
         <span class="restore"><i class="material-icons">crop_landscape</i></span>
         <span class="close"><i class="material-icons">close</i></span>
       </div>
+    </div>
+    <div class="title-spacer" height="29px">
+
     </div>
     <div class="body">
       <div id="top-frame">
@@ -137,9 +139,10 @@
               <button id="next"><i class="material-icons">skip_next</i></button>
           </div>
           <div class="now-playing-options">
+              <input type="range" min="0" max="100" value="50" class="volume-tweak" id="volume">
+              <button id="volume"><i class="material-icons">volume_up</i></button>
               <button id="repeat" :class="{active: repeat}" v-on:click="toggleRepeat()"><i class="material-icons">repeat</i></button>
               <button id="shuffle"><i class="material-icons">shuffle</i></button>
-              <button id="volume"><i class="material-icons">volume_up</i></button>
           </div>
         </div>
       </div>

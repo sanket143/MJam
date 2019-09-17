@@ -21,3 +21,11 @@ let nowplaying_frame = new Vue({
         }
     }
 })
+
+let volume = document.getElementById("volume");
+
+volume.onload = function(){
+    volume.oninput = function(){
+        global_args.nowplaying.volume(this.value / 100);
+    }
+}
