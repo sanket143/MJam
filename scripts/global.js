@@ -27,7 +27,7 @@ global_args.getFiles = new Promise((resolve, reject) => {
     });
 });
 
-global_args.play = (file_path) => {
+global_args.load = (file_path) => {
     if(global_args.nowplaying){
         global_args.nowplaying.stop();
     }
@@ -44,8 +44,6 @@ global_args.play = (file_path) => {
     }
 
     global_args.updateRecent(nowplaying_frame.song);
-
-    global_args.nowplaying.play();
 
     global_args.nowplaying.on("play", function(){
         nowplaying_frame.paused = false;
@@ -80,7 +78,20 @@ global_args.getTags = (file_path) => {
         } else {
             jsmediatags.read(file_path, {
                 onSuccess: function(tag){
-                    tag.tags.picture.data = getAlbumArt(tag);
+                    if(!tag.tags.title){
+                        tag.tags.title = path.basename(file_path);
+                    }
+
+                    if(!tag.tags.artist){
+                        tag.tags.artist = "Unknown";
+                    }
+
+                    if(!tag.tags.artist){
+                        tag.tags.album = "Unknown";
+                    }
+                    tag.tags.picture = {
+                        data: getAlbumArt(tag)
+                    }
                     tag.tags.src = file_path;
                     if(global_args.artists[tag.tags.artist]){
                         global_args.artists[tag.tags.artist].push(tag.tags);
@@ -99,15 +110,20 @@ global_args.getTags = (file_path) => {
 }
 
 // Get recent.json
-global_args.getRecent = () => {
+global_args.getRecent =  new Promise((resolve, reject) => {
     if(fs.existsSync('.user/recent.json')){
         fs.readFile('.user/recent.json', (err, data) => {
-            global_args.recent_songs = JSON.parse(data.toString());
-        })
+            if(err){
+                reject(err);
+            } else {
+                resolve(JSON.parse(data.toString()));
+            }
+        });
     } else {
+        global_args.recent_songs = [];
 
     }
-}
+});
 
 // Updates recent.json
 global_args.updateRecent = (tags) => {
@@ -132,6 +148,8 @@ global_args.updateRecent = (tags) => {
                 jsonObj.splice(gotcha, 1);
                 jsonObj.unshift(tags);
             }
+
+            content_frame.recent_songs = jsonObj;
 
             fs.writeFile(`.user/recent.json`, JSON.stringify(jsonObj), function(err){
                 if(err){
@@ -158,11 +176,15 @@ global_args.updateRecent = (tags) => {
 
 const getAlbumArt = function(tags){
     const picture = tags.tags.picture;
-    let base64String = "";
-    for(var i = 0; i < picture.data.length; i++){
-        base64String += String.fromCharCode(picture.data[i]);
+    let imageURI = "assets/mjam-logo.png";
+    if(picture){
+        let base64String = "";
+        for(var i = 0; i < picture.data.length; i++){
+            base64String += String.fromCharCode(picture.data[i]);
+        }
+        imageURI = "data:" + picture.format + ";base64," + window.btoa(base64String);
+        let image = electron.nativeImage.createFromDataURL(imageURI);
     }
-    const imageURI = "data:" + picture.format + ";base64," + window.btoa(base64String);
-    let image = electron.nativeImage.createFromDataURL(imageURI);
+
     return imageURI;
 }

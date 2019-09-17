@@ -6,20 +6,24 @@ global_args.getFiles.then((files) => {
     }
 });
 
+global_args.getRecent.then((songs) => {
+    for(i = 0; i < songs.length; i++){
+        content_frame.recent_songs.push(songs[i]);
+    }
+
+})
+
 let content_frame = new Vue({
     el: ".main-frame",
     data: {
         frame: 'home',
-        all_songs: []
-    },
-    computed: {
-        recent_songs: function(){
-            return this.all_songs.slice(0, 6);
-        }
+        all_songs: [],
+        recent_songs: []
     },
     methods: {
         playMe: function(src){
-            global_args.play(src);
+            global_args.load(src);
+            global_args.nowplaying.play();
         },
         updateFrame: function(frame){
             this.frame = frame;

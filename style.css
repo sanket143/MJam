@@ -228,7 +228,7 @@ button {
 
 /* Main Frame */
 #content .main-frame #recent-home-section {
-  height: 230px;
+  height: calc(100vh - 80px - 148px);
 }
 
 #content .main-frame .songs-list {
@@ -367,6 +367,13 @@ button {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+#right-frame .artist-item:hover {
+  color: #e45252;
+  text-decoration: underline;
 }
 
 #right-frame .artist-item .artist-art {
