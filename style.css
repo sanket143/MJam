@@ -235,6 +235,8 @@ button {
   display: flex;
   flex-wrap: wrap;
   overflow: hidden;
+  overflow-y: scroll;
+  height: calc(100vh - 80px - 148px);
 }
 
 #content .main-frame .songs-list .song {
@@ -353,8 +355,12 @@ button {
 #right-frame {
   height: 100%;
   width: 100%;
-  padding: 10px;
   padding-left: 0;
+}
+
+#right-frame .artist-list {
+  height: calc(100vh - 80px - 94px);
+  overflow-y: scroll;
 }
 
 #right-frame .artist-item {
