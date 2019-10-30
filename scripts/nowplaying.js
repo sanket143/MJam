@@ -1,7 +1,16 @@
+global_args.getRecent.then((songs) => {
+    if(songs.length){
+        nowplaying_frame.song = songs[0];
+        global_args.load(songs[0].src);
+        nowplaying_frame.paused = !global_args.nowplaying.playing();
+
+    }
+})
+
 let nowplaying_frame = new Vue({
     el: "#nowplaying",
     data: {
-        song: '',
+        song: "",
         paused: false,
         repeat: false,
         completion: 0
@@ -21,11 +30,3 @@ let nowplaying_frame = new Vue({
         }
     }
 })
-
-let volume = document.getElementById("volume");
-
-volume.onload = function(){
-    volume.oninput = function(){
-        global_args.nowplaying.volume(this.value / 100);
-    }
-}
