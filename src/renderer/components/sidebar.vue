@@ -5,7 +5,7 @@
       <div class="sidebar-buttons">
         <router-link
           class="sidebar-button"
-          v-bind:class="{'is-active': frame === 'home'}"
+          v-bind:class="{'is-active': route === 'home'}"
           to='/'
         >
           <i class="material-icons">home</i>
@@ -13,7 +13,7 @@
         </router-link>
         <router-link
           class="sidebar-button"
-          v-bind:class="{'is-active': frame === 'playlists'}"
+          v-bind:class="{'is-active': route === 'playlists'}"
           to='/playlists'
         >
           <i class="material-icons">playlist_play</i>
@@ -21,7 +21,7 @@
         </router-link>
         <router-link
           class="sidebar-button"
-          v-bind:class="{'is-active': frame === 'loved'}"
+          v-bind:class="{'is-active': route === 'loved'}"
           to='/loved'
         >
           <i class="material-icons">favorite</i>
@@ -29,7 +29,7 @@
         </router-link>
         <router-link
           class="sidebar-button"
-          v-bind:class="{'is-active': frame === 'songs'}"
+          v-bind:class="{'is-active': route === 'songs'}"
           to='/songs'
         >
           <i class="material-icons">music_note</i>
@@ -37,7 +37,7 @@
         </router-link>
         <router-link
           class="sidebar-button"
-          v-bind:class="{'is-active': frame === 'settings'}"
+          v-bind:class="{'is-active': route === 'settings'}"
           to='/settings'
         >
           <i class="material-icons">settings</i>
@@ -53,6 +53,11 @@ export default {
   data () {
     return {
       frame: 'home'
+    }
+  },
+  computed: {
+    route: function () {
+      return this.$route.name
     }
   }
 }
