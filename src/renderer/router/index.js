@@ -4,7 +4,6 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   routes: [
     {
       path: '/',
@@ -14,7 +13,7 @@ export default new Router({
     {
       path: '/songs',
       name: 'songs',
-      component: require('@/components/mainframes/songs').default
+      component: () => import(/* webpackChunkName: "songs" */ '@/components/mainframes/songs')
     },
     {
       path: '/artist/:artist_name',
