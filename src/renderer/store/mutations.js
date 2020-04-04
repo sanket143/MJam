@@ -5,12 +5,11 @@ export default {
     state.songsMap = songs
   },
   playSong: function (state, fileSource) {
+    state.nowplaying.current = state.songsMap[fileSource]
     let howl = new Howl({
-      src: [fileSource]
+      src: ['file://' + fileSource]
     })
 
-    state.nowplaying.current = state.songsMap[fileSource]
-    state.nowplaying.howl = howl
     howl.play()
   }
 }

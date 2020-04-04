@@ -1,7 +1,7 @@
 <template>
   <div class="song">
     <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
-      <div class="play-toggle" v-if="nowplaying.current !== song.src" @click="playMe(song.src)">
+      <div class="play-toggle" v-if="nowplaying.current.src !== song.src" @click="playMe(song.src)">
         <i class="material-icons">play_circle_outline</i>
       </div>
       <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   props: ['song'],
@@ -29,9 +29,9 @@ export default {
     ])
   },
   methods: {
-    playMe: function (songSrc) {
-      console.log(songSrc)
-    }
+    ...mapActions([
+      'playMe'
+    ])
   }
 }
 </script>

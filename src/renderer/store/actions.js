@@ -3,7 +3,7 @@ import path from 'path'
 import findit from 'findit'
 import * as mm from 'music-metadata'
 
-let songsMap = []
+let songsMap = {}
 let mp3Files = []
 
 async function extractAndStoreMetaTags (commit) {
@@ -25,7 +25,7 @@ async function extractAndStoreMetaTags (commit) {
       tags.picture = '@/assets/mjam-default'
     }
 
-    songsMap.push(tags)
+    songsMap[tags.src] = tags
   }
 
   commit('addSongs', songsMap)
