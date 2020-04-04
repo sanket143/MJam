@@ -6,6 +6,7 @@
       <div id="top-frame">
         <SideBar />
         <Content />
+        <RightBar />
       </div>
     </div>
   </div>
@@ -17,13 +18,15 @@ import { mapActions } from 'vuex'
 import TitleBar from '@/components/titlebar'
 import SideBar from '@/components/sidebar'
 import Content from '@/components/content'
+import RightBar from '@/components/rightbar'
 
 export default {
   name: 'mjam',
   components: {
     TitleBar,
     SideBar,
-    Content
+    Content,
+    RightBar
   },
   methods: {
     ...mapActions([

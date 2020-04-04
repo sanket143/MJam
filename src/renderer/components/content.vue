@@ -70,7 +70,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #48000087;
+  background: rgba(72, 0, 0, 0.46);
 }
 
 #content .songs-list .song-art .play-toggle:hover {
