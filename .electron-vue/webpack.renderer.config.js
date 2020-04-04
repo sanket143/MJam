@@ -24,7 +24,10 @@ let whiteListedModules = [
   'vue-router',
   'vuex',
   'vuex-electron',
-  'vue-electron'
+  'vue-electron',
+  'findit',
+  'music-metadata',
+  'howler'
 ]
 
 let rendererConfig = {

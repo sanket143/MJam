@@ -3,46 +3,46 @@
     <div id="sidebar">
       <h4 class="label">Library</h4>
       <div class="sidebar-buttons">
-        <a
+        <router-link
           class="sidebar-button"
           v-bind:class="{'is-active': frame === 'home'}"
-          v-on:click="updateFrame('home')"
+          to='/'
         >
           <i class="material-icons">home</i>
           <span>Home</span>
-        </a>
-        <a
+        </router-link>
+        <router-link
           class="sidebar-button"
           v-bind:class="{'is-active': frame === 'playlists'}"
-          v-on:click="updateFrame('playlists')"
+          to='/playlists'
         >
           <i class="material-icons">playlist_play</i>
           <span>Playlists</span>
-        </a>
-        <a
+        </router-link>
+        <router-link
           class="sidebar-button"
           v-bind:class="{'is-active': frame === 'loved'}"
-          v-on:click="updateFrame('loved')"
+          to='/loved'
         >
           <i class="material-icons">favorite</i>
           <span>Loved</span>
-        </a>
-        <a
+        </router-link>
+        <router-link
           class="sidebar-button"
           v-bind:class="{'is-active': frame === 'songs'}"
-          v-on:click="updateFrame('songs')"
+          to='/songs'
         >
           <i class="material-icons">music_note</i>
           <span>Songs</span>
-        </a>
-        <a
+        </router-link>
+        <router-link
           class="sidebar-button"
           v-bind:class="{'is-active': frame === 'settings'}"
-          v-on:click="updateFrame('settings')"
+          to='/settings'
         >
           <i class="material-icons">settings</i>
           <span>Settings</span>
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
@@ -88,6 +88,8 @@ export default {
   padding-left: 10px;
   width: 100px;
   cursor: pointer;
+  color: black;
+  text-decoration: none;
 }
 
 #sidebar .sidebar-button.is-active {
