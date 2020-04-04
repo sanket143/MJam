@@ -1,7 +1,7 @@
 export default {
   destination: '~/Music/Songs/SPOT',
-  songsData: [],
+  songsMap: {},
   nowplaying: {
-    current: ''
+    current: {}
   }
 }

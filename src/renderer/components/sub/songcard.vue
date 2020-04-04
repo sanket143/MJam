@@ -1,7 +1,7 @@
 <template>
   <div class="song">
     <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
-      <div class="play-toggle" v-if="nowplaying.current !== song.src" v-on:click="playMe(song.src)">
+      <div class="play-toggle" v-if="nowplaying.current !== song.src" @click="playMe(song.src)">
         <i class="material-icons">play_circle_outline</i>
       </div>
       <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
@@ -27,6 +27,11 @@ export default {
     ...mapState([
       'nowplaying'
     ])
+  },
+  methods: {
+    playMe: function (songSrc) {
+      console.log(songSrc)
+    }
   }
 }
 </script>

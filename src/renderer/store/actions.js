@@ -3,7 +3,7 @@ import path from 'path'
 import findit from 'findit'
 import * as mm from 'music-metadata'
 
-let songsData = []
+let songsMap = []
 let mp3Files = []
 
 async function extractAndStoreMetaTags (commit) {
@@ -25,10 +25,10 @@ async function extractAndStoreMetaTags (commit) {
       tags.picture = '@/assets/mjam-default'
     }
 
-    songsData.push(tags)
+    songsMap.push(tags)
   }
 
-  commit('addSongs', songsData)
+  commit('addSongs', songsMap)
 }
 
 function cacheData () {
@@ -36,7 +36,7 @@ function cacheData () {
     fs.mkdirSync('./.mjam-data', { recursive: true })
   }
 
-  fs.writeFile('./.mjam-data/songsData.json', JSON.stringify(songsData), (err) => {
+  fs.writeFile('./.mjam-data/songsMap.json', JSON.stringify(songsMap), (err) => {
     if (err) {
       console.error(err)
     } else {
@@ -60,5 +60,8 @@ export default {
       cacheData()
       extractAndStoreMetaTags(commit)
     })
+  },
+  playMe: ({ commit }, fileSource) => {
+    commit('playSong', fileSource)
   }
 }
