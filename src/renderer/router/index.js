@@ -18,7 +18,7 @@ export default new Router({
     {
       path: '/artist/:artist_name',
       name: 'artist',
-      component: require('@/components/mainframes/artist').default
+      component: () => import(/* webpackChunkName: "songs" */ '@/components/mainframes/artist')
     }
   ]
 })

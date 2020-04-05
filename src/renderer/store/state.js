@@ -1,5 +1,5 @@
 export default {
-  destination: '~/Music/Songs/SPOT',
+  destination: '',
   songsMap: {},
   nowplaying: {
     current: {}
