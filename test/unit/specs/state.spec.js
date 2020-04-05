@@ -16,10 +16,6 @@ describe('store', () => {
       store.dispatch('setLookupDirectory', 'hello_world')
       expect(store.state.lookupDirectory === 'hello_world')
     })
-    it('should have a key "nowplaying" with proper data structure', () => {
-      expect(typeof (store.state.nowplaying) === 'object')
-      expect(store.state.nowplaying.current === {})
-    })
   })
   describe('@getters', () => {
     it('should retrieve correct lookupDirectory value from state', () => {
