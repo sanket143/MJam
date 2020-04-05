@@ -1,5 +1,5 @@
 export default {
-  destination: '',
+  lookupDirectory: '',
   songsMap: {},
   nowplaying: {
     current: {}

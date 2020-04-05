@@ -32,7 +32,8 @@ module.exports = config => {
   config.set({
     browsers: ['visibleElectron'],
     client: {
-      useIframe: false
+      useIframe: false,
+      captureConsole: false
     },
     coverageReporter: {
       dir: './coverage',

@@ -5,7 +5,7 @@
         <img src="~@/assets/mjam-logo.png" width="19px">
         <span>MJam</span>
       </h6>
-      <h6 class="song-title">{{ title }}</h6>
+      <h6 class="song-title">{{ title.length !== 0 ? title : 'MJam: A Modern Music Player' }}</h6>
 
       <div class="action-buttons">
         <span class="minimize"><i class="material-icons">remove</i></span>

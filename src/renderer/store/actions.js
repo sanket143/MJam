@@ -63,5 +63,8 @@ export default {
   },
   playMe: ({ commit }, fileSource) => {
     commit('playSong', fileSource)
+  },
+  setLookupDirectory: ({ commit }, dir) => {
+    commit('updateLookupDirectory', dir)
   }
 }

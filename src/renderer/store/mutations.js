@@ -11,5 +11,8 @@ export default {
     })
 
     howl.play()
+  },
+  updateLookupDirectory: (state, lookupDirectory) => {
+    state.lookupDirectory = lookupDirectory
   }
 }
