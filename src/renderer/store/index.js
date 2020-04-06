@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import { createPersistedState } from 'vuex-electron'
+import VuexPersistence from 'vuex-persist'
 
 import state from './state'
 import actions from './actions'
@@ -16,7 +17,8 @@ export default new Vuex.Store({
   getters,
   mutations,
   plugins: [
-    createPersistedState()
+    createPersistedState(),
+    new VuexPersistence().plugin
   ],
   strict: process.env.NODE_ENV !== 'production'
 })

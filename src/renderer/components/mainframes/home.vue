@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'home',
@@ -34,6 +34,11 @@ export default {
     ...mapState([
       'songsData',
       'nowplaying'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'playMe'
     ])
   }
 }

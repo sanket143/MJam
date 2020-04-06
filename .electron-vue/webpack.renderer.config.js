@@ -24,6 +24,7 @@ let whiteListedModules = [
   'vue-router',
   'vuex',
   'vuex-electron',
+  'vuex-persist',
   'vue-electron',
   'findit',
   'music-metadata',
