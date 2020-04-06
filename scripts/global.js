@@ -7,7 +7,7 @@ const dest = `${HOME}/Music`;
 
 // Globally used and available;
 let global_args = {
-    dest: `${HOME}/Music`,
+    dest: `${HOME}/Music/Songs/SPOT`,
     nowplaying_src: false,
     artists: [],
     computed_tags: {}
