@@ -13,7 +13,8 @@ let nowplaying_frame = new Vue({
         song: "",
         paused: false,
         repeat: false,
-        completion: 0
+        completion: 0,
+        count: 0
     },
     methods: {
         pause: function(){

@@ -155,10 +155,13 @@
               <button id="next"><i class="material-icons">skip_next</i></button>
           </div>
           <div class="now-playing-options">
-              <!-- <input type="range" min="0" max="100" value="50" class="volume-tweak" id="volume"> -->
+              <input type="range" min="0" max="100" value="50" class="volume-tweak" id="volume">
               <button id="loved"><i class="material-icons">favorite</i></button>
-              <!-- <button id="repeat" :class="{active: repeat}" v-on:click="toggleRepeat()"><i class="material-icons">repeat</i></button> -->
-              <!-- <button id="shuffle"><i class="material-icons">shuffle</i></button> -->
+              <button id="repeat" :class="{active: repeat}" v-on:click="toggleRepeat()"><i class="material-icons">repeat</i></button>
+              <button id="shuffle"><i class="material-icons">shuffle</i></button>
+          </div>
+          <div id="test">
+            {{ count }}
           </div>
         </div>
       </div>
@@ -169,7 +172,7 @@
     <script src="./scripts/frame.js"></script>
     <script src="./scripts/sidebar.js"></script>
     <script src="./scripts/nowplaying.js"></script>
-    <script src="./scripts/blah.js"></script>
+    <script src="./scripts/setup.js"></script>
 
   </body>
 </html>

@@ -1,5 +1,6 @@
 const state = Vue.observable({
-  allFiles: []
+  allFiles: [],
+  lookupLocation: "/home/sanket143/Music/Songs/SPOT"
 })
 
-export default state
+module.exports = state

@@ -18,6 +18,8 @@
     "electron": "^5.0.7"
   },
   "dependencies": {
-    "jsmediatags": "^3.9.2"
+    "findit": "^2.0.0",
+    "jsmediatags": "^3.9.2",
+    "music-metadata": "^6.3.7"
   }
 }

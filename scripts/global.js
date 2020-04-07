@@ -1,9 +1,9 @@
-const electron = require("electron");
-const jsmediatags = require("jsmediatags");
-const path = require("path");
-const fs = require("fs");
-const HOME = process.env.HOME
-const dest = `${HOME}/Music`;
+var electron = require("electron");
+var jsmediatags = require("jsmediatags");
+var path = require("path");
+var fs = require("fs");
+var HOME = process.env.HOME
+var dest = `${HOME}/Music`;
 
 // Globally used and available;
 let global_args = {
@@ -86,7 +86,7 @@ global_args.getTags = (file_path) => {
                         tag.tags.artist = "Unknown";
                     }
 
-                    if(!tag.tags.artist){
+                    if(!tag.tags.album){
                         tag.tags.album = "Unknown";
                     }
                     tag.tags.picture = {

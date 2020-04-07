@@ -1,32 +1,30 @@
-const fs = require("fs")
-const path = require("path")
-const findit = require("findit")
-
-const state = require("./state")
-const constants = require("./constants")
-const { printError, readJSON } = require("./methods")
+var path = require("path");
+var findit = require("findit");
+var state = require("./scripts/state");
+var constants = require("./scripts/constants");
+var { readJSON, saveCache, getMetaData } = require("./scripts/methods");
 
 // Fetch list of files from the computer
-(async () => {
+(async function () {
   readJSON(constants.CACHED_FILE_SRC)
     .then((jsonData) => {
-
+      state.allFiles = jsonData;
+      console.log(jsonData);
     })
     .catch((err) => {
-      printError(err)
+      console.log(err);
 
-      let finder = findit(store.dest)
+      let finder = findit(state.lookupLocation);
 
       finder.on('file', (file) => {
-        if(path.extname(file) == ".mp3"){
-          state.allFiles.push(file)
+        if (path.extname(file) == ".mp3") {
+          state.allFiles.push(file);
         }
       })
 
       finder.on('end', () => {
-        saveCache(state.allSongs)
-      })
-    })
-})().catch(err => {
-  console.error(err)
-})
+        getMetaData();
+        saveCache(state.allFiles);
+      });
+    });
+})()
