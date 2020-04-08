@@ -9,8 +9,8 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
 (async function () {
   readJSON(constants.CACHED_FILE_SRC)
     .then((jsonData) => {
-      state.allFiles = jsonData;
-      console.log(jsonData);
+      state.allFiles = Object.keys(jsonData)
+      state.songsMap = jsonData;
     })
     .catch((err) => {
       console.log(err);
@@ -25,7 +25,6 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
 
       finder.on('end', async () => {
         await extractAndStoreMetaTags();
-        console.log(state.songsMap)
         saveCache();
       });
     });

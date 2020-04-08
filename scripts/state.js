@@ -3,7 +3,12 @@ const state = new Vue({
     allFiles: [],
     songsMap: {},
     lookupLocation: "/home/sanket143/Music/Songs/SPOT",
-    contentFrame: "home"
+    contentFrame: "home",
+    nowplaying: {
+      song: {
+
+      }
+    }
   }
 })
 

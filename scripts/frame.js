@@ -13,7 +13,6 @@ global_args.getRecent.then((songs) => {
 
 })
 
-
 let title_frame = new Vue({
     el: ".title-bar",
     data: {

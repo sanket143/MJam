@@ -81,7 +81,7 @@
               <h4 class="label">Songs</h4>
               <div class="songs-list" id="songs-section">
                 <div class="song" v-for="song in all_songs">
-                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
+                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
                     <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
                     </div>
@@ -91,7 +91,7 @@
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtists(song.artist)">{{ song.artist }}</h5>
+                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtists(song.artist)">{{ song.artists.join(", ") }}</h5>
                   </div>
                 </div>
               </div>

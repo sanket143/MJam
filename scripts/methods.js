@@ -27,7 +27,7 @@ const saveCache = () => {
   }, () => {
     fs.writeFile(
       constants.CACHED_FILE_SRC,
-      JSON.stringify(getters.songsMap),
+      JSON.stringify(state.songsMap),
       (err) => {
         if (err) {
           console.log(err)
@@ -37,8 +37,8 @@ const saveCache = () => {
 }
 
 const extractAndStoreMetaTags = async () => {
-  for (var i in getters.allFiles) {
-    let mp3File = getters.allFiles[i]
+  for (var i in state.allFiles) {
+    let mp3File = state.allFiles[i]
     let metadata = await mm.parseFile(mp3File)
     let commonMetadata = metadata.common
     let tags = {
@@ -54,7 +54,7 @@ const extractAndStoreMetaTags = async () => {
     } else {
       tags.picture = 'assets/mjam-default.png'
     }
-    mutations.addSong(tags.src, tags)
+    state.songsMap[tags.src] = tags
   }
 }
 
