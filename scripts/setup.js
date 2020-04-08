@@ -1,8 +1,8 @@
 var path = require("path");
 var findit = require("findit");
-var state = require("./scripts/state");
+var { getters, mutations } = require("./scripts/state");
 var constants = require("./scripts/constants");
-var { readJSON, saveCache, getMetaData } = require("./scripts/methods");
+var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/methods");
 
 // Fetch list of files from the computer
 (async function () {
@@ -22,9 +22,10 @@ var { readJSON, saveCache, getMetaData } = require("./scripts/methods");
         }
       })
 
-      finder.on('end', () => {
-        getMetaData();
-        saveCache(state.allFiles);
+      finder.on('end', async () => {
+        await extractAndStoreMetaTags();
+        console.log(state.songsMap)
+        saveCache();
       });
     });
 })()

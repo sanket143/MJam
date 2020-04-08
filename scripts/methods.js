@@ -1,7 +1,7 @@
 var fs = require("fs");
-var jsmediatags = require("jsmediatags");
+var mm = require("music-metadata");
 
-var state = require('./state')
+var { getters, mutations } = require('./state')
 var constants = require("./constants")
 
 const readJSON = (filePath) => {
@@ -12,7 +12,8 @@ const readJSON = (filePath) => {
           reject(err)
         }
 
-        resolve(data)
+        jsonObj = JSON.parse(data.toString());
+        resolve(jsonObj)
       })
     } else {
       reject(`No such file or directory: ${filePath}`)
@@ -26,7 +27,7 @@ const saveCache = () => {
   }, () => {
     fs.writeFile(
       constants.CACHED_FILE_SRC,
-      state.allSongs,
+      JSON.stringify(getters.songsMap),
       (err) => {
         if (err) {
           console.log(err)
@@ -34,36 +35,31 @@ const saveCache = () => {
       })
   })
 }
-const getAlbumArt = function(tags){
-    const picture = tags.picture;
-    let imageURI = "assets/mjam-logo.png";
-    if(picture){
-        let base64String = "";
-        for(var i = 0; i < picture.data.length; i++){
-            base64String += String.fromCharCode(picture.data[i]);
-        }
-        imageURI = "data:" + picture.format + ";base64," + window.btoa(base64String);
+
+const extractAndStoreMetaTags = async () => {
+  for (var i in getters.allFiles) {
+    let mp3File = getters.allFiles[i]
+    let metadata = await mm.parseFile(mp3File)
+    let commonMetadata = metadata.common
+    let tags = {
+      src: mp3File,
+      title: commonMetadata.title,
+      album: commonMetadata.album,
+      artists: commonMetadata.artists,
+      genre: commonMetadata.genre
     }
 
-    return imageURI;
-}
-
-const getMetaData = (file_path) => {
-  return new Promise((resolve, reject) => {
-    jsmediatags.read(file_path, {
-      onSuccess: (tag) => {
-        let tags = tag.tags;
-        if (!tags.title) {
-          tags.title = path.basename(file_path);
-        }
-        
-        tags.picture = getAlbumArt(tags)
-      }
-    })
-  })
+    if (commonMetadata.picture.length) {
+      tags.picture = `data:${commonMetadata.picture[0].format};base64,${commonMetadata.picture[0].data.toString('base64')}`
+    } else {
+      tags.picture = '@/assets/mjam-default'
+    }
+    mutations.addSong(tags.src, tags)
+  }
 }
 
 module.exports = {
   readJSON,
-  saveCache
+  saveCache,
+  extractAndStoreMetaTags
 }

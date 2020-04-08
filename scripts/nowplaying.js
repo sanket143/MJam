@@ -1,3 +1,5 @@
+var state = require("./scripts/state.js")
+
 global_args.getRecent.then((songs) => {
     if(songs.length){
         nowplaying_frame.song = songs[0];
@@ -13,8 +15,7 @@ let nowplaying_frame = new Vue({
         song: "",
         paused: false,
         repeat: false,
-        completion: 0,
-        count: 0
+        completion: 0
     },
     methods: {
         pause: function(){
