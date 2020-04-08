@@ -62,8 +62,4 @@ const content_frame = new Vue({
   }
 })
 
-window.globalCompo = {
-  content_frame
-}
-
 module.exports = content_frame

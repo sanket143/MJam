@@ -6,9 +6,7 @@ const state = new Vue({
     lookupLocation: "/home/sanket143/Music/Songs/SPOT",
     contentFrame: "home",
     nowplaying: {
-      song: {
-
-      }
+      song: {}
     }
   }
 })

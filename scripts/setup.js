@@ -9,9 +9,10 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
 (async function () {
   readJSON(constants.CACHED_FILE_SRC)
     .then((jsonData) => {
-      console.log(jsonData)
       state.allFiles = Object.keys(jsonData)
       state.songsMap = jsonData;
+      state.nowplaying.song = jsonData[state.allFiles[0]]
+      console.log(state.nowplaying.song)
     })
     .catch((err) => {
       console.log(err)
@@ -37,6 +38,7 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
     .then((jsonData) => {
       console.log(jsonData)
       state.recentSongs = jsonData
+      state.nowplaying.song = jsonData[0]
     })
     .catch((err) => {
       console.log(err)

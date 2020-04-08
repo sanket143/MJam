@@ -6,6 +6,13 @@
 
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./stylesheets/nowplaying.css">
+
+    <style>
+    [v-cloak] {
+      z-index: -100;
+      opacity: 0;
+    }
+    </style>
   </head>
   <body>
     <script src="./scripts/vue.js"></script>
@@ -57,12 +64,12 @@
             <i class="material-icons">search</i>
             <input placeholder="Search songs, artists and albums..." type="text" id="search">
           </div>
-          <div class="main-frame">
+          <div class="main-frame" v-cloak>
             <div v-if="frame == 'home'">
               <h4 class="label">Recently Played</h4>
               <transition-group name="list-complete" tag="div" class="songs-list" id="recent-home-section">
                 <div class="song list-complete-item" v-for="song in recent_songs" v-bind:key="song.src">
-                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
+                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
                     <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
                     </div>
@@ -72,7 +79,7 @@
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtists(song.artist)">{{ song.artist }}</h5>
+                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtists(song.artist)">{{ song.artists.join(', ') }}</h5>
                   </div>
                 </div>
               </transition-group>
@@ -131,7 +138,7 @@
     </div>
 
     <div id="bottom-frame">
-      <div id="nowplaying" v-show="song != ''">
+      <div id="nowplaying" v-if="song.title != undefined" v-cloak>
         <div class="seekbar-wrapper">
             <div class="seekbar-cover">
                 <div class="seekbar">
@@ -142,12 +149,12 @@
         </div>
         <div class="now-playing-wrapper">
           <div class="now-playing-track">
-              <div class="now-playing-art" :style="{'background-image': 'url(' + song.picture.data + ')'}"></div>
+              <div class="now-playing-art" :style="{'background-image': 'url(' + song.picture + ')'}"></div>
               <div class="now-playing-details">
                   <h5 class="now-playing-track-title">{{ song.title }}</h5>
-                  <h6 class="now-playing-track-artist">{{ song.artist }}</h6>
+                  <h6 class="now-playing-track-artist">{{ song.artists.join(", ") }}</h6>
               </div>
-          </div> 
+          </div>
           <div class="now-playing-controls">
               <button id="prev"><i class="material-icons">skip_previous</i></button>
               <button id="toggle" v-if="!paused" v-on:click="pause()"><i class="material-icons">pause_circle_filled</i></button>
@@ -166,8 +173,6 @@
 
     <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/global.js"></script>
-    <script src="./scripts/frame.js"></script>
-    <script src="./scripts/nowplaying.js"></script>
     <script src="./scripts/setup.js"></script>
 
   </body>
