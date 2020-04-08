@@ -12,7 +12,7 @@ let sidebar_frame = new Vue({
   },
   methods: {
     updateFrame: function (frame) {
-      content_frame.updateFrame(frame);
+      state.contentFrame = frame
     },
   }
 })

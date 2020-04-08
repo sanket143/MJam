@@ -3,11 +3,13 @@ const state = require("../state")
 const content_frame = new Vue({
   el: ".main-frame",
   data: {
-    frame: state.contentFrame,
     artist: [],
     current: ""
   },
   computed: {
+    frame(){
+      return state.contentFrame
+    },
     all_songs(){
       return Object.values(state.songsMap)
     },
