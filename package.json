@@ -4,7 +4,8 @@
   "description": "An MP3 Player",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "lint": "eslint ."
   },
   "repository": "https://github.com/sanket143/mjam",
   "keywords": [
@@ -18,6 +19,7 @@
     "electron": "^5.0.7"
   },
   "dependencies": {
+    "eslint": "^6.8.0",
     "findit": "^2.0.0",
     "jsmediatags": "^3.9.2",
     "music-metadata": "^6.3.7"

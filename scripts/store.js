@@ -19,12 +19,12 @@ const store = new Vuex.Store({
           let picture = tag.tags.picture;
           let imageURI = "assets/mjam-default.png";
 
-          if(picture){
-              let base64String = "";
-              for(var i = 0; i < picture.data.length; i++){
-                  base64String += String.fromCharCode(picture.data[i]);
-              }
-              imageURI = "data:" + picture.format + ";base64," + window.btoa(base64String);
+          if (picture) {
+            let base64String = "";
+            for (var i = 0; i < picture.data.length; i++) {
+              base64String += String.fromCharCode(picture.data[i]);
+            }
+            imageURI = "data:" + picture.format + ";base64," + window.btoa(base64String);
           }
 
           tag.tags.picture = {
