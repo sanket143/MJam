@@ -4,7 +4,6 @@ var { getters, mutations } = require("./scripts/state");
 var constants = require("./scripts/constants");
 var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/methods");
 
-// Fetch list of files from the computer
 (async function () {
   readJSON(constants.CACHED_FILE_SRC)
     .then((jsonData) => {
@@ -18,7 +17,7 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
 
       finder.on('file', (file) => {
         if (path.extname(file) == ".mp3") {
-          state.allFiles.push(file);
+          mutations.addFile(file);
         }
       })
 

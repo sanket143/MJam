@@ -6,15 +6,19 @@ const state = Vue.observable({
 
 const getters = {
   allFiles: () => state.allFiles,
-  songsMap: () => state.songsMap
+  songsMap: () => state.songsMap,
+  totalFiles: () => state.allFiles
 }
 
 const mutations = {
-  addFile: (file) => state.allFiles.push(file),
-  addSong: (key, value) => state.songsMap[key] = value
+  addFile: (file) => {
+    Vue.set(state, allFiles, state.allFiles.push(file))
+  },
+  setSongsMap: (jsonData) => state.songsMap[key] = value
 }
 
 module.exports = {
   getters,
-  mutations
+  mutations,
+  state
 }
