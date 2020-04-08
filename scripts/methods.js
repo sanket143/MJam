@@ -52,7 +52,7 @@ const extractAndStoreMetaTags = async () => {
     if (commonMetadata.picture.length) {
       tags.picture = `data:${commonMetadata.picture[0].format};base64,${commonMetadata.picture[0].data.toString('base64')}`
     } else {
-      tags.picture = '@/assets/mjam-default'
+      tags.picture = 'assets/mjam-default.png'
     }
     mutations.addSong(tags.src, tags)
   }

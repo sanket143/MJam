@@ -1,6 +1,7 @@
+require('./scripts/components')
 var path = require("path");
 var findit = require("findit");
-var { getters, mutations } = require("./scripts/state");
+var state = require("./scripts/state");
 var constants = require("./scripts/constants");
 var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/methods");
 
