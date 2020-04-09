@@ -18,16 +18,10 @@ const nowplaying_frame = new Vue({
   },
   methods: {
     pause: function () {
-      global_args.nowplaying.pause();
-      this.paused = true;
+      state.pause();
     },
     play: function () {
-      global_args.nowplaying.play();
-      this.paused = false;
-    },
-    toggleRepeat: function () {
-      this.repeat = !this.repeat;
-      global_args.nowplaying.loop(this.repeat);
+      state.play();
     }
   }
 })

@@ -5,8 +5,11 @@ const state = new Vue({
     recentSongs: [],
     lookupLocation: "/home/sanket143/Music/Songs/SPOT",
     contentFrame: "home",
-    FrameData: {
-      artist: ""
+    frameData: {
+      artist: {
+        name: "",
+        songs: []
+      }
     },
     nowplaying: {
       id: 0,
@@ -23,17 +26,19 @@ const state = new Vue({
       for(src in this.songsMap){
         this.songsMap[src].artists.forEach(artist => {
           if(obj[artist]){
-            obj[artist].push(songsMap[src])
+            obj[artist].push(this.songsMap[src])
           } else {
-            obj[artist] = [songsMap[src]]
+            obj[artist] = [this.songsMap[src]]
           }
         })
       }
+
+      return obj
     }
   },
   methods: {
     play(sources){
-      if(this.nowplaying.song.src !== sources[0]){
+      if(sources && this.nowplaying.song.src !== sources[0]){
         this.nowplaying.completion = 0
 
         if(this.nowplaying.instance){
@@ -44,6 +49,8 @@ const state = new Vue({
           src: sources
         })
         
+        this.nowplaying.song = this.songsMap[sources[0]]
+
         this.nowplaying.instance.on("pause", () => {
           this.nowplaying.src = ""
           clearInterval(this.nowplaying.tracker);
@@ -61,8 +68,7 @@ const state = new Vue({
       }, 100)
 
       this.nowplaying.id = this.nowplaying.instance.play()
-      this.nowplaying.src = sources[0]
-      this.nowplaying.song = this.songsMap[this.nowplaying.src]
+      this.nowplaying.src = this.nowplaying.song.src
     },
     pause(){
       this.nowplaying.instance.pause()
