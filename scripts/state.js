@@ -68,7 +68,7 @@ const state = new Vue({
 
         this.nowplaying.ids.push(this.nowplaying.instance.play())
         this.nowplaying.song = this.songsMap[sources[0]]
-        
+
         let srcIndex = this.recentSongSources.indexOf(sources[0])
 
         // Update Recently Played Songs list
@@ -102,7 +102,7 @@ const state = new Vue({
       }
 
       this.nowplaying.tracker = setInterval(() => {
-        this.nowplaying.completion = 
+        this.nowplaying.completion =
         this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10);
       }, 100)
 
