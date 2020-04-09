@@ -1,16 +1,19 @@
+const state = require("../state")
+
 const title_frame = new Vue({
   el: ".title-bar",
-  data: {
-    song: {
-      title: "",
-      artist: ""
-    }
-  },
   computed: {
     title: function () {
-      if (this.song.title != "" && this.song.artist != "") {
-        return this.song.title + " - " + this.song.artist;
+      let title = "MJam - A Modern Music Player"
+      if (state.nowplaying.song.title) {
+        title = state.nowplaying.song.title
+
+        if(state.nowplaying.song.artists.length){
+          title += " - " + state.nowplaying.song.artists.join(", ")
+        }
       }
+
+      return title
     }
   }
 })
