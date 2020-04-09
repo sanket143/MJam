@@ -3,7 +3,7 @@
     "ecmaVersion": 10
   },
   "rules": {
-    "no-undef": "error",
+    "no-undef": "off",
     "array-bracket-spacing": [
       "error",
       "never"
