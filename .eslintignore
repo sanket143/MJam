@@ -1,0 +1,4 @@
+node_modules/*
+scripts/vue.min.js
+scripts/vue.js
+scripts/howler.min.js
