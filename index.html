@@ -62,10 +62,29 @@
         <div id="content">
           <div class="search-bar">
             <i class="material-icons">search</i>
-            <input placeholder="Search songs, artists and albums..." type="text" id="search">
+            <input v-model="search_query" placeholder="Search songs, artists and albums..." type="text" id="search">
           </div>
           <transition-group name="fade" class="main-frame" v-cloak tag="div" mode="out-in">
-            <div key="home" v-if="frame == 'home'">
+            <div key="serach" v-if="showSearch">
+              <h4 class="label">Search Result for '{{ search_query }}'</h4>
+              <transition-group name="list-complete" tag="div" class="songs-list" id="recent-home-section">
+                <div class="song list-complete-item" v-for="song in searchResult" v-bind:key="song.src">
+                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
+                    <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
+                      <i class="material-icons">play_circle_outline</i>
+                    </div>
+                    <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
+                      <i class="material-icons">pause_circle_outline</i>
+                    </div>
+                  </div>
+                  <div class="song-desc">
+                    <h6 class="song-title">{{ song.title }}</h6>
+                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">{{ song.artists.join(', ') }}</h5>
+                  </div>
+                </div>
+              </transition-group>
+            </div>
+            <div key="home" v-else-if="frame == 'home'">
               <h4 class="label">Recently Played</h4>
               <transition-group name="list-complete" tag="div" class="songs-list" id="recent-home-section">
                 <div class="song list-complete-item" v-for="song in recent_songs" v-bind:key="song.src">
