@@ -12,7 +12,11 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
       state.allFiles = Object.keys(jsonData)
       state.songsMap = jsonData;
       state.nowplaying.song = jsonData[state.allFiles[0]]
-      console.log(state.nowplaying.song)
+      state.nowplaying.instance = new Howl({
+        src: [state.allFiles[0]]
+      })
+
+      window.instance = state.nowplaying.instance
     })
     .catch((err) => {
       console.log(err)

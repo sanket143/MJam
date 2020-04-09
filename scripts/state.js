@@ -8,17 +8,29 @@ const state = new Vue({
     nowplaying: {
       id: 0,
       src: "",
-      song: {}
+      song: {},
+      instance: false
     }
   },
   methods: {
     play(sources){
-      const howl = new Howl({
-        src: sources
-      })
+      if(this.nowplaying.song.src != sources[0]){
+        if(this.nowplaying.instance){
+          this.nowplaying.instance.stop()
+        }
 
-      this.nowplaying.id = howl.play()
+        this.nowplaying.instance = new Howl({
+          src: sources
+        })
+      }
+
+      this.nowplaying.id = this.nowplaying.instance.play()
       this.nowplaying.src = sources[0]
+      this.nowplaying.song = this.songsMap[this.nowplaying.src]
+    },
+    pause(){
+      this.nowplaying.instance.pause()
+      this.nowplaying.src = ""
     }
   }
 })

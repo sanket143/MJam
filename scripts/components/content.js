@@ -24,8 +24,7 @@ const content_frame = new Vue({
       state.play([src])
     },
     pauseMe: function () {
-      global_args.nowplaying.pause()
-      this.current = ""
+      state.pause()
     },
     updateFrame: function (frame) {
       this.frame = frame
