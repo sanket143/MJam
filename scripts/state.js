@@ -78,13 +78,16 @@ const state = new Vue({
         // Save Recently Played Songs
         saveRecentSongs()
 
+        // When song is paused
         this.nowplaying.instance.on("pause", () => {
           this.nowplaying.src = ""
           clearInterval(this.nowplaying.tracker);
         })
 
+        // When the song ends
         this.nowplaying.instance.on("end", () => {
           this.nowplaying.src = ""
+          this.nowplaying.completion = 0
           clearInterval(this.nowplaying.tracker);
         })
       } else {
