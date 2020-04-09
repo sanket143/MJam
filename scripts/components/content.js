@@ -3,9 +3,12 @@ const state = require("../state")
 const content_frame = new Vue({
   el: ".main-frame",
   data: {
-    artist: [],
+    artist: "",
   },
   computed: {
+    artistSongs(){
+      return state
+    },
     current(){
       return state.nowplaying.src
     },

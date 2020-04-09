@@ -5,6 +5,9 @@ const state = new Vue({
     recentSongs: [],
     lookupLocation: "/home/sanket143/Music/Songs/SPOT",
     contentFrame: "home",
+    FrameData: {
+      artist: ""
+    },
     nowplaying: {
       id: 0,
       src: "",
@@ -14,17 +17,41 @@ const state = new Vue({
       tracker: false
     }
   },
+  computed: {
+    artistsMap(){
+      let obj = {}
+      for(src in this.songsMap){
+        this.songsMap[src].artists.forEach(artist => {
+          if(obj[artist]){
+            obj[artist].push(songsMap[src])
+          } else {
+            obj[artist] = [songsMap[src]]
+          }
+        })
+      }
+    }
+  },
   methods: {
     play(sources){
       if(this.nowplaying.song.src !== sources[0]){
         this.nowplaying.completion = 0
-        
+
         if(this.nowplaying.instance){
           this.nowplaying.instance.stop()
         }
 
         this.nowplaying.instance = new Howl({
           src: sources
+        })
+        
+        this.nowplaying.instance.on("pause", () => {
+          this.nowplaying.src = ""
+          clearInterval(this.nowplaying.tracker);
+        })
+
+        this.nowplaying.instance.on("end", () => {
+          this.nowplaying.src = ""
+          clearInterval(this.nowplaying.tracker);
         })
       }
 
@@ -38,9 +65,7 @@ const state = new Vue({
       this.nowplaying.song = this.songsMap[this.nowplaying.src]
     },
     pause(){
-      clearInterval(this.nowplaying.tracker);
       this.nowplaying.instance.pause()
-      this.nowplaying.src = ""
     }
   }
 })
