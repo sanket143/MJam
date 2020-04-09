@@ -6,8 +6,11 @@ const content_frame = new Vue({
     artist: "",
   },
   computed: {
+    artistNames(){
+      return state.frameData.artist.names
+    },
     artistSongs(){
-      return state
+      return state.songsOfArtist
     },
     current(){
       return state.nowplaying.src
@@ -30,31 +33,11 @@ const content_frame = new Vue({
       state.pause()
     },
     updateFrame: function (frame) {
-      this.frame = frame
+      state.contentFrame = frame
     },
-    showArtists: function (artists) {
-      artists_list = artists.split(", ")
-      songs = []
-      console.log(artists_list)
-      this.artist = {
-        name: artists,
-        songs: right_frame.artist_songs[artists_list[0].trim()]
-      }
-
-      song_list = [];
-      for (let i = 0; i < this.artist.songs.length; i++) {
-        song_list.push(this.artist.songs[i].src)
-      }
-
-      for (let i = 1; i < artists_list.length; i++) {
-        songs = right_frame.artist_songs[artists_list[i].trim()]
-        for (let j = 0; j < songs.length; j++) {
-          if (song_list.indexOf(songs[j].src) == -1) {
-            this.artist.songs.push(songs[j])
-            song_list.push(songs[j].src)
-          }
-        }
-      }
+    showArtistSongs: function (artists) {
+      console.log(artists)
+      state.frameData.artist.names = artists
     }
   }
 })

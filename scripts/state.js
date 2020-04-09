@@ -9,8 +9,7 @@ const state = new Vue({
     contentFrame: "home",
     frameData: {
       artist: {
-        name: "",
-        songs: []
+        names: []
       }
     },
     nowplaying: {
@@ -39,6 +38,14 @@ const state = new Vue({
       }
 
       return obj
+    },
+    songsOfArtist(){
+      let arr = []
+      this.frameData.artist.names.forEach(artist => {
+        arr = arr.concat(this.artistsMap[artist])
+      })
+
+      return arr
     }
   },
   methods: {

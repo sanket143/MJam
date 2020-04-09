@@ -15,7 +15,7 @@
     </style>
   </head>
   <body>
-    <script src="./scripts/vue.js"></script>
+    <script src="./scripts/vue.min.js"></script>
     <div class="title-bar">
       <h6 class="brand-logo">
         <img src="./assets/mjam-logo.png" width="19px">
@@ -79,7 +79,7 @@
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtists(song.artist)">{{ song.artists.join(', ') }}</h5>
+                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">{{ song.artists.join(', ') }}</h5>
                   </div>
                 </div>
               </transition-group>
@@ -98,16 +98,18 @@
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtists(song.artist)">{{ song.artists.join(", ") }}</h5>
+                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">
+                      {{ song.artists.join(", ") }}
+                    </h5>
                   </div>
                 </div>
               </div>
             </div>
-            <div key="artist" v-else-if="frame == 'artist'">
-              <h4 class="label">{{ artist.name }}</h4>
+            <div :key="artistNames.join(', ')" v-else-if="frame == 'artist'">
+              <h4 class="label">{{ artistNames.join(", ") }}</h4>
               <div class="songs-list" id="songs-section">
-                <div class="song" v-for="song in artist.songs">
-                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture.data + ')' }">
+                <div class="song" v-for="song in artistSongs">
+                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
                     <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
                     </div>
@@ -117,7 +119,7 @@
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtists(song.artist)">{{ song.artist }}</h5>
+                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtistSongs(song.artist)">{{ song.artists.join(", ") }}</h5>
                   </div>
                 </div>
               </div>
@@ -129,7 +131,7 @@
             <h4>Artists</h4>
             <div class="artist-list">
               <div class="artist-item" v-for="artist in artists">
-                <div class="artist-name" v-on:click="updateFrame('artist');showArtist(artist)"> {{ artist }} </div>
+                <div class="artist-name" v-on:click="updateFrame('artist');showArtistSongs([artist])"> {{ artist }} </div>
               </div>
             </div>
           </div>
@@ -172,8 +174,6 @@
     </div>
 
     <script src="./scripts/howler.min.js"></script>
-    <script src="./scripts/global.js"></script>
     <script src="./scripts/setup.js"></script>
-
   </body>
 </html>

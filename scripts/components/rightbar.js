@@ -12,10 +12,10 @@ const right_frame = new Vue({
   },
   methods: {
     updateFrame: function (frame) {
-      state.contentFrame = frame;
+      state.contentFrame = frame
     },
-    showArtist: function (artist) {
-      state.frameData.artist.name = artist
+    showArtistSongs: function (artists) {
+      state.frameData.artist.names = artists
     }
   }
 })
