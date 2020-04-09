@@ -3,10 +3,12 @@ const state = require("../state")
 const nowplaying_frame = new Vue({
   el: "#nowplaying",
   data: {
-    paused: false,
     repeat: false
   },
   computed: {
+    paused(){
+      return state.nowplaying.src === ""
+    },
     completion(){
       return state.nowplaying.completion
     },

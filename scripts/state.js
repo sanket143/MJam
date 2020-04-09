@@ -16,7 +16,9 @@ const state = new Vue({
   },
   methods: {
     play(sources){
-      if(this.nowplaying.song.src != sources[0]){
+      if(this.nowplaying.song.src !== sources[0]){
+        this.nowplaying.completion = 0
+        
         if(this.nowplaying.instance){
           this.nowplaying.instance.stop()
         }
