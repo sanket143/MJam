@@ -1,6 +1,5 @@
 const state = require("../state")
 
-console.log(state.contentFrame)
 let sidebar_frame = new Vue({
   el: "#sidebar",
   data: {

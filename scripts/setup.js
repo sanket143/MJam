@@ -7,7 +7,7 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
 
 // Fetch list of files from the computer
 (async function () {
-  readJSON(constants.CACHED_FILE_SRC)
+  await readJSON(constants.CACHED_FILE_SRC)
     .then((jsonData) => {
       state.allFiles = Object.keys(jsonData)
       state.songsMap = jsonData;
@@ -16,7 +16,6 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
         src: [state.allFiles[0]]
       })
 
-      window.instance = state.nowplaying.instance
     })
     .catch((err) => {
       console.log(err)
@@ -34,17 +33,14 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
         saveCache()
       })
     })
-})();
-
-// Fetch recent songs
-(async function () {
-  readJSON(constants.RECENT_SONGS_FILE_SRC)
+  await readJSON(constants.RECENT_SONGS_FILE_SRC)
     .then((jsonData) => {
       console.log(jsonData)
-      state.recentSongs = jsonData
-      state.nowplaying.song = jsonData[0]
+      state.recentSongSources = jsonData
+      state.nowplaying.song = state.songsMap[jsonData[0]]
+      console.log(state.nowplaying.song)
     })
     .catch((err) => {
       console.log(err)
     })
-})()
+})();

@@ -1,7 +1,6 @@
 var fs = require("fs");
 var mm = require("music-metadata");
 
-var { getters, mutations } = require('./state')
 var constants = require("./constants")
 
 const readJSON = (filePath) => {
@@ -36,6 +35,22 @@ const saveCache = () => {
   })
 }
 
+const saveRecentSongs = () => {
+  fs.mkdir(path.dirname(constants.RECENT_SONGS_FILE_SRC), {
+    recursive: true
+  }, () => {
+    console.log(state.recentSongSources)
+    fs.writeFile(
+      constants.RECENT_SONGS_FILE_SRC,
+      JSON.stringify(state.recentSongSources),
+      (err) => {
+        if (err) {
+          console.log(err)
+        }
+      })
+  })
+}
+
 const extractAndStoreMetaTags = async () => {
   for (var i in state.allFiles) {
     let mp3File = state.allFiles[i]
@@ -54,12 +69,17 @@ const extractAndStoreMetaTags = async () => {
     } else {
       tags.picture = 'assets/mjam-default.png'
     }
-    state.songsMap[tags.src] = tags
+
+    Vue.set(state.songsMap, tags.src, tags)
+    if(i == 0){
+      state.nowplaying.song = tags
+    }
   }
 }
 
 module.exports = {
   readJSON,
   saveCache,
-  extractAndStoreMetaTags
+  extractAndStoreMetaTags,
+  saveRecentSongs
 }

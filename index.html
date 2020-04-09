@@ -64,7 +64,7 @@
             <i class="material-icons">search</i>
             <input placeholder="Search songs, artists and albums..." type="text" id="search">
           </div>
-          <transition-group name="fade" class="main-frame" v-cloak tag="div" mode="in-out">
+          <transition-group name="fade" class="main-frame" v-cloak tag="div" mode="out-in">
             <div key="home" v-if="frame == 'home'">
               <h4 class="label">Recently Played</h4>
               <transition-group name="list-complete" tag="div" class="songs-list" id="recent-home-section">

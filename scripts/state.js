@@ -1,8 +1,10 @@
+const { saveRecentSongs } = require('./methods')
+
 const state = new Vue({
   data: {
     allFiles: [],
     songsMap: {},
-    recentSongs: [],
+    recentSongSources: [],
     lookupLocation: "/home/sanket143/Music/Songs/SPOT",
     contentFrame: "home",
     frameData: {
@@ -12,7 +14,7 @@ const state = new Vue({
       }
     },
     nowplaying: {
-      id: 0,
+      ids: [],
       src: "",
       song: {},
       completion: 0,
@@ -21,6 +23,9 @@ const state = new Vue({
     }
   },
   computed: {
+    recentSongs(){
+      return this.recentSongSources.map((source) => this.songsMap[source])
+    },
     artistsMap(){
       let obj = {}
       for(src in this.songsMap){
@@ -37,19 +42,41 @@ const state = new Vue({
     }
   },
   methods: {
+    stop(){
+      for(i in this.nowplaying.ids){
+        this.nowplaying.instance.stop(this.nowplaying.ids[i])
+      }
+    },
     play(sources){
       if(sources && this.nowplaying.song.src !== sources[0]){
         this.nowplaying.completion = 0
 
-        if(this.nowplaying.instance){
-          this.nowplaying.instance.stop()
+        if(this.nowplaying.ids.length){
+          this.stop()
         }
 
         this.nowplaying.instance = new Howl({
           src: sources
         })
-        
+
+        this.nowplaying.ids.push(this.nowplaying.instance.play())
         this.nowplaying.song = this.songsMap[sources[0]]
+        
+        let srcIndex = this.recentSongSources.indexOf(sources[0])
+
+        // Update Recently Played Songs list
+        if(srcIndex == -1){
+          this.recentSongSources.unshift(sources[0]);
+          if(this.recentSongSources.length > 10){
+            this.recentSongSources.pop();
+          }
+        } else {
+          this.recentSongSources.splice(srcIndex, 1);
+          this.recentSongSources.unshift(sources[0]);
+        }
+
+        // Save Recently Played Songs
+        saveRecentSongs()
 
         this.nowplaying.instance.on("pause", () => {
           this.nowplaying.src = ""
@@ -60,6 +87,8 @@ const state = new Vue({
           this.nowplaying.src = ""
           clearInterval(this.nowplaying.tracker);
         })
+      } else {
+        this.nowplaying.id = this.nowplaying.instance.play()
       }
 
       this.nowplaying.tracker = setInterval(() => {
@@ -67,11 +96,12 @@ const state = new Vue({
         this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10);
       }, 100)
 
-      this.nowplaying.id = this.nowplaying.instance.play()
       this.nowplaying.src = this.nowplaying.song.src
     },
     pause(){
-      this.nowplaying.instance.pause()
+      for(i in this.nowplaying.ids){
+        this.nowplaying.instance.pause(this.nowplaying.ids[i])
+      }
     }
   }
 })
