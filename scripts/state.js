@@ -9,7 +9,9 @@ const state = new Vue({
       id: 0,
       src: "",
       song: {},
-      instance: false
+      completion: 0,
+      instance: false,
+      tracker: false
     }
   },
   methods: {
@@ -24,11 +26,17 @@ const state = new Vue({
         })
       }
 
+      this.nowplaying.tracker = setInterval(() => {
+        this.nowplaying.completion = 
+        this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10);
+      }, 100)
+
       this.nowplaying.id = this.nowplaying.instance.play()
       this.nowplaying.src = sources[0]
       this.nowplaying.song = this.songsMap[this.nowplaying.src]
     },
     pause(){
+      clearInterval(this.nowplaying.tracker);
       this.nowplaying.instance.pause()
       this.nowplaying.src = ""
     }

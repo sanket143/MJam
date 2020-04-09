@@ -4,10 +4,12 @@ const nowplaying_frame = new Vue({
   el: "#nowplaying",
   data: {
     paused: false,
-    repeat: false,
-    completion: 0
+    repeat: false
   },
   computed: {
+    completion(){
+      return state.nowplaying.completion
+    },
     song(){
       return state.nowplaying.song
     }
