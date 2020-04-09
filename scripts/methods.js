@@ -1,7 +1,8 @@
-var fs = require("fs");
-var mm = require("music-metadata");
+const fs = require("fs")
+const path = require("path")
+const mm = require("music-metadata")
 
-var constants = require("./constants")
+const constants = require("./constants")
 
 const readJSON = (filePath) => {
   return new Promise((resolve, reject) => {
@@ -58,13 +59,13 @@ const extractAndStoreMetaTags = async () => {
     let commonMetadata = metadata.common
     let tags = {
       src: mp3File,
-      title: commonMetadata.title,
+      title: commonMetadata.title ? commonMetadata.title : path.basename(mp3File),
       album: commonMetadata.album,
-      artists: commonMetadata.artists,
+      artists: commonMetadata.artists ? commonMetadata.artists : ["Unknown"],
       genre: commonMetadata.genre
     }
 
-    if (commonMetadata.picture.length) {
+    if (commonMetadata.picture) {
       tags.picture = `data:${commonMetadata.picture[0].format};base64,${commonMetadata.picture[0].data.toString('base64')}`
     } else {
       tags.picture = 'assets/mjam-default.png'

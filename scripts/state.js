@@ -5,7 +5,7 @@ const state = new Vue({
     allFiles: [],
     songsMap: {},
     recentSongSources: [],
-    lookupLocation: "/home/sanket143/Music/Songs/SPOT",
+    lookupLocation: "/home/sanket143/Music/Songs",
     contentFrame: "home",
     frameData: {
       artist: {

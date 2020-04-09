@@ -7,7 +7,7 @@ const right_frame = new Vue({
   },
   computed: {
     artists(){
-      return Object.keys(state.artistsMap)
+      return Object.keys(state.artistsMap).sort()
     }
   },
   methods: {
