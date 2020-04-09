@@ -4,9 +4,11 @@ const content_frame = new Vue({
   el: ".main-frame",
   data: {
     artist: [],
-    current: ""
   },
   computed: {
+    current(){
+      return state.nowplaying.src
+    },
     frame(){
       return state.contentFrame
     },
@@ -19,14 +21,7 @@ const content_frame = new Vue({
   },
   methods: {
     playMe: function (src) {
-      if (global_args.nowplaying_src != src) {
-        global_args.load(src);
-        global_args.nowplaying.play()
-      } else {
-        global_args.nowplaying.play()
-      }
-
-      this.current = src
+      state.play([src])
     },
     pauseMe: function () {
       global_args.nowplaying.pause()
@@ -36,7 +31,7 @@ const content_frame = new Vue({
       this.frame = frame
     },
     showArtists: function (artists) {
-      artists_list = artists.split(",")
+      artists_list = artists.split(", ")
       songs = []
       console.log(artists_list)
       this.artist = {
@@ -61,5 +56,9 @@ const content_frame = new Vue({
     }
   }
 })
+
+window.global = {
+  content_frame
+}
 
 module.exports = content_frame

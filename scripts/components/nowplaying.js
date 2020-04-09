@@ -28,9 +28,4 @@ const nowplaying_frame = new Vue({
   }
 })
 
-window.globalCompo = {
-  nowplaying_frame
-}
-
-
 module.exports = nowplaying_frame
