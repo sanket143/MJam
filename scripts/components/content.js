@@ -16,10 +16,11 @@ const content_frame = new Vue({
       return this.search_query != ""
     },
     searchResult(){
-      const query = this.search_query.replace(/\s+/gi, '.*?')
+      let query = this.search_query.replace(/\s+/gi, '.*?')
+      query = query.replace("(", "\\(").replace(")", "\\)")
+      console.log(query)
       const pattern = new RegExp(query, "gi")
       const results = this.processedSongsList.filter((song) => song.search.match(pattern))
-      console.log(results)
       return results
     },
     artistNames(){
