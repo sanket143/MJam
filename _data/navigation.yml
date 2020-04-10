@@ -1,0 +1,4 @@
+- name: Sign Up for Beta
+  link: https://github.com/sanket143/MJam
+  new_window: true
+  highlight: true
