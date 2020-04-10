@@ -12,7 +12,7 @@ const readJSON = (filePath) => {
           reject(err)
         }
 
-        jsonObj = JSON.parse(data.toString());
+        jsonObj = JSON.parse(data.toString())
         resolve(jsonObj)
       })
     } else {

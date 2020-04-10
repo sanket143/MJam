@@ -18,10 +18,10 @@ const nowplaying_frame = new Vue({
   },
   methods: {
     pause: function () {
-      state.pause();
+      state.pause()
     },
     play: function () {
-      state.play();
+      state.play()
     }
   }
 })

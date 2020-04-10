@@ -4,6 +4,7 @@
   },
   "rules": {
     "no-undef": "off",
+    "semi": ["error", "never"],
     "array-bracket-spacing": [
       "error",
       "never"

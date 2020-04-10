@@ -73,13 +73,13 @@ const state = new Vue({
 
         // Update Recently Played Songs list
         if(srcIndex == -1){
-          this.recentSongSources.unshift(sources[0]);
+          this.recentSongSources.unshift(sources[0])
           if(this.recentSongSources.length > 10){
-            this.recentSongSources.pop();
+            this.recentSongSources.pop()
           }
         } else {
-          this.recentSongSources.splice(srcIndex, 1);
-          this.recentSongSources.unshift(sources[0]);
+          this.recentSongSources.splice(srcIndex, 1)
+          this.recentSongSources.unshift(sources[0])
         }
 
         // Save Recently Played Songs
@@ -88,14 +88,14 @@ const state = new Vue({
         // When song is paused
         this.nowplaying.instance.on("pause", () => {
           this.nowplaying.src = ""
-          clearInterval(this.nowplaying.tracker);
+          clearInterval(this.nowplaying.tracker)
         })
 
         // When the song ends
         this.nowplaying.instance.on("end", () => {
           this.nowplaying.src = ""
           this.nowplaying.completion = 0
-          clearInterval(this.nowplaying.tracker);
+          clearInterval(this.nowplaying.tracker)
         })
       } else {
         this.nowplaying.id = this.nowplaying.instance.play()
@@ -103,7 +103,7 @@ const state = new Vue({
 
       this.nowplaying.tracker = setInterval(() => {
         this.nowplaying.completion =
-        this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10);
+        this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10)
       }, 100)
 
       this.nowplaying.src = this.nowplaying.song.src

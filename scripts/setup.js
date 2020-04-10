@@ -10,12 +10,12 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
   await readJSON(constants.CACHED_FILE_SRC)
     .then((jsonData) => {
       state.allFiles = Object.keys(jsonData)
-      state.songsMap = jsonData;
+      state.songsMap = jsonData
     })
     .catch((err) => {
       console.log(err)
 
-      let finder = findit(state.lookupLocation);
+      let finder = findit(state.lookupLocation)
 
       finder.on('file', (file) => {
         if (path.extname(file) == ".mp3") {
@@ -24,13 +24,12 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
       })
 
       finder.on('end', async () => {
-        await extractAndStoreMetaTags();
+        await extractAndStoreMetaTags()
         saveCache()
       })
     })
   await readJSON(constants.RECENT_SONGS_FILE_SRC)
     .then((jsonData) => {
-      console.log(jsonData)
       state.recentSongSources = jsonData
       state.nowplaying.song = state.songsMap[jsonData[0]]
       state.nowplaying.instance = new Howl({
@@ -40,4 +39,4 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
     .catch((err) => {
       console.log(err)
     })
-})();
+})()
