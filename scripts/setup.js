@@ -11,11 +11,6 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
     .then((jsonData) => {
       state.allFiles = Object.keys(jsonData)
       state.songsMap = jsonData;
-      state.nowplaying.song = jsonData[state.allFiles[0]]
-      state.nowplaying.instance = new Howl({
-        src: [state.allFiles[0]]
-      })
-
     })
     .catch((err) => {
       console.log(err)
@@ -38,7 +33,9 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
       console.log(jsonData)
       state.recentSongSources = jsonData
       state.nowplaying.song = state.songsMap[jsonData[0]]
-      console.log(state.nowplaying.song)
+      state.nowplaying.instance = new Howl({
+        src: [jsonData[0]]
+      })
     })
     .catch((err) => {
       console.log(err)
