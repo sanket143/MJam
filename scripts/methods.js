@@ -1,5 +1,6 @@
 const fs = require("fs")
 const path = require("path")
+const findit = require("findit")
 const mm = require("music-metadata")
 
 const constants = require("./constants")
@@ -78,9 +79,94 @@ const extractAndStoreMetaTags = async () => {
   }
 }
 
+const reScanDirectory = async () => {
+  let finder = findit(state.settings.lookupLocation)
+
+  finder.on('file', (file) => {
+    if(path.extname(file) == ".mp3"){
+      state.allFiles.push(file)
+    }
+  })
+
+  finder.on('end', async () => {
+    await extractAndStoreMetaTags()
+    saveCache()
+  })
+
+  fs.mkdir(path.dirname(constants.SETTINGS_FILE_SRC), {
+    recursive: true
+  }, () => {
+    fs.writeFile(
+      constants.SETTINGS_FILE_SRC,
+      JSON.stringify(state.settings),
+      (err) => {
+        if (err) {
+          console.log(err)
+        }
+      })
+  })
+}
+
+// Fetch list of files from the computer
+const scanDirectory = async () => {
+  await readJSON(constants.SETTINGS_FILE_SRC)
+  .then((jsonData) => {
+    state.settings.lookupLocation = jsonData["lookupLocation"]
+  }).catch((err) => {
+    console.log(err)
+    state.settings.lookupLocation = path.resolve(process.env["HOME"], "Music")
+  })
+
+  await readJSON(constants.CACHED_FILE_SRC)
+  .then((jsonData) => {
+    state.allFiles = Object.keys(jsonData)
+    state.songsMap = jsonData
+  })
+  .catch((err) => {
+    console.log(err)
+
+    let finder = findit(state.settings.lookupLocation)
+
+    finder.on('file', (file) => {
+      if (path.extname(file) == ".mp3") {
+        state.allFiles.push(file)
+      }
+    })
+
+    finder.on('end', async () => {
+      await extractAndStoreMetaTags()
+      saveCache()
+    })
+  })
+}
+
+// Fetch list of recents songs
+const readRecentSongs = async () => {
+  await readJSON(constants.RECENT_SONGS_FILE_SRC)
+    .then((jsonData) => {
+      state.recentSongSources = jsonData
+      state.nowplaying.song = state.songsMap[jsonData[0]]
+      state.nowplaying.instance = new Howl({
+        src: [jsonData[0]]
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+const initState = async () => {
+  await scanDirectory()
+  await readRecentSongs()
+}
+
 module.exports = {
-  readJSON,
-  saveCache,
   extractAndStoreMetaTags,
-  saveRecentSongs
+  readRecentSongs,
+  saveRecentSongs,
+  reScanDirectory,
+  scanDirectory,
+  saveCache,
+  readJSON,
+  initState
 }

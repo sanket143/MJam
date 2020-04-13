@@ -1,11 +1,17 @@
 const state = require("../state")
+const { reScanDirectory } = require("../methods")
 
 const content_frame = new Vue({
   el: "#content",
   data: {
     search_query: "",
+    lookupDir: ""
   },
   computed: {
+    init(){
+      this.lookupDir = state.settings.lookupLocation
+      return state.settings.lookupLocation
+    },
     processedSongsList(){
       return this.all_songs.map((song) => {
         song.search = `${song.title} - ${song.artists.join(", ")}`
@@ -43,6 +49,11 @@ const content_frame = new Vue({
     }
   },
   methods: {
+    reScan(){
+      console.log(this.lookupDir)
+      state.settings.lookupLocation = this.lookupDir
+      reScanDirectory()
+    },
     playMe: function (src) {
       state.play([src])
     },
@@ -56,6 +67,9 @@ const content_frame = new Vue({
       console.log(artists)
       state.frameData.artist.names = artists
     }
+  },
+  mounted(){
+    this.lookupDir = state.settings.lookupLocation
   }
 })
 

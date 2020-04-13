@@ -12,8 +12,29 @@ body {
   grid-template-rows: 30px auto 80px;
 }
 
-button {
+button, input {
   outline: none;
+}
+
+.mj-input {
+  color: grey;
+  padding: 7px;
+  width: 250px;
+  border-radius: 2px;
+  border: 1px solid whitesmoke;
+}
+
+.mj-input:focus {
+  color: black
+}
+
+.mj-rescan {
+  border: none;
+  padding: 7px 11px;
+  cursor: pointer;
+  background: #eb6d7f;
+  color: white;
+  border-radius: 2px;
 }
 
 /* latin */

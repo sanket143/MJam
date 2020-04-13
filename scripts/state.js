@@ -1,12 +1,16 @@
-const { saveRecentSongs } = require('./methods')
+const methods = require('./methods')
+console.log(methods)
 
 const state = new Vue({
   data: {
     allFiles: [],
     songsMap: {},
+    isScanning: false,
     recentSongSources: [],
-    lookupLocation: "/home/sanket143/Music/Songs",
     contentFrame: "home",
+    settings: {
+      lookupLocation: ""
+    },
     frameData: {
       artist: {
         names: []
@@ -98,7 +102,7 @@ const state = new Vue({
           clearInterval(this.nowplaying.tracker)
         })
       } else {
-        this.nowplaying.id = this.nowplaying.instance.play()
+        this.nowplaying.ids.push(this.nowplaying.instance.play())
       }
 
       this.nowplaying.tracker = setInterval(() => {
@@ -116,4 +120,5 @@ const state = new Vue({
   }
 })
 
+window.country = state
 module.exports = state
