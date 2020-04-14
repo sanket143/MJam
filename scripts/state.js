@@ -9,7 +9,7 @@ const state = new Vue({
     contentFrame: "home",
     settings: {
       lookupLocation: "",
-      onRepeat: false
+      repeat: false
     },
     frameData: {
       artist: {
@@ -60,7 +60,17 @@ const state = new Vue({
     },
     load(sources){
       this.nowplaying.instance = new Howl({
-        src: sources
+        src: sources,
+        loop: this.repeat
+      })
+
+      // When song is paused
+      this.nowplaying.instance.on("play", () => {
+        this.nowplaying.tracker = setInterval(() => {
+          this.nowplaying.completion =
+          this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10)
+        }, 100)
+        this.nowplaying.src = this.nowplaying.song.src
       })
 
       // When song is paused
@@ -80,7 +90,6 @@ const state = new Vue({
     },
     play(sources){
       if(sources && this.nowplaying.song.src !== sources[0]){
-        this.nowplaying.completion = 0
 
         if(this.nowplaying.ids.length){
           this.stop()
@@ -90,6 +99,7 @@ const state = new Vue({
         this.nowplaying.ids.push(this.nowplaying.instance.play())
 
         let srcIndex = this.recentSongSources.indexOf(sources[0])
+        this.nowplaying.completion = 0
 
         // Update Recently Played Songs list
         if(srcIndex == -1){
@@ -107,13 +117,6 @@ const state = new Vue({
       } else {
         this.nowplaying.ids.push(this.nowplaying.instance.play())
       }
-
-      this.nowplaying.tracker = setInterval(() => {
-        this.nowplaying.completion =
-        this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10)
-      }, 100)
-
-      this.nowplaying.src = this.nowplaying.song.src
     },
     pause(){
       for(i in this.nowplaying.ids){
@@ -123,5 +126,4 @@ const state = new Vue({
   }
 })
 
-window.country = state
 module.exports = state

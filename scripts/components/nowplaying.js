@@ -2,10 +2,10 @@ const state = require("../state")
 
 const nowplaying_frame = new Vue({
   el: "#nowplaying",
-  data: {
-    repeat: false
-  },
   computed: {
+    repeat(){
+      return state.settings.repeat
+    },
     paused(){
       return state.nowplaying.src === ""
     },
@@ -14,14 +14,22 @@ const nowplaying_frame = new Vue({
     },
     song(){
       return state.nowplaying.song
+    },
+    onRepeatChange(){
+      state.nowplaying.instance.loop(state.settings.repeat)
+      console.log(state.settings.repeat)
+      return state.settings.repeat
     }
   },
   methods: {
-    pause: function () {
+    pause() {
       state.pause()
     },
-    play: function () {
+    play() {
       state.play()
+    },
+    toggleRepeat(){
+      state.settings.repeat = !state.settings.repeat
     }
   }
 })

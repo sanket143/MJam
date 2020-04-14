@@ -10,6 +10,7 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
   await readJSON(constants.SETTINGS_FILE_SRC)
     .then((jsonData) => {
       state.settings.lookupLocation = jsonData["lookupLocation"]
+      state.settings.repeat = jsonData["repeat"] ? jsonData["repeat"] : false
     }).catch((err) => {
       console.log(err)
       state.settings.lookupLocation = path.resolve(process.env["HOME"], "Music")
