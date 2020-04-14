@@ -1,5 +1,4 @@
-const methods = require('./methods')
-console.log(methods)
+const { saveRecentSongs } = require('./methods')
 
 const state = new Vue({
   data: {
@@ -9,7 +8,8 @@ const state = new Vue({
     recentSongSources: [],
     contentFrame: "home",
     settings: {
-      lookupLocation: ""
+      lookupLocation: "",
+      onRepeat: false
     },
     frameData: {
       artist: {
@@ -58,6 +58,26 @@ const state = new Vue({
         this.nowplaying.instance.stop(this.nowplaying.ids[i])
       }
     },
+    load(sources){
+      this.nowplaying.instance = new Howl({
+        src: sources
+      })
+
+      // When song is paused
+      this.nowplaying.instance.on("pause", () => {
+        this.nowplaying.src = ""
+        clearInterval(this.nowplaying.tracker)
+      })
+
+      // When the song ends
+      this.nowplaying.instance.on("end", () => {
+        this.nowplaying.src = ""
+        this.nowplaying.completion = 0
+        clearInterval(this.nowplaying.tracker)
+      })
+
+      this.nowplaying.song = this.songsMap[sources[0]]
+    },
     play(sources){
       if(sources && this.nowplaying.song.src !== sources[0]){
         this.nowplaying.completion = 0
@@ -66,12 +86,8 @@ const state = new Vue({
           this.stop()
         }
 
-        this.nowplaying.instance = new Howl({
-          src: sources
-        })
-
+        this.load(sources)
         this.nowplaying.ids.push(this.nowplaying.instance.play())
-        this.nowplaying.song = this.songsMap[sources[0]]
 
         let srcIndex = this.recentSongSources.indexOf(sources[0])
 
@@ -88,19 +104,6 @@ const state = new Vue({
 
         // Save Recently Played Songs
         saveRecentSongs()
-
-        // When song is paused
-        this.nowplaying.instance.on("pause", () => {
-          this.nowplaying.src = ""
-          clearInterval(this.nowplaying.tracker)
-        })
-
-        // When the song ends
-        this.nowplaying.instance.on("end", () => {
-          this.nowplaying.src = ""
-          this.nowplaying.completion = 0
-          clearInterval(this.nowplaying.tracker)
-        })
       } else {
         this.nowplaying.ids.push(this.nowplaying.instance.play())
       }
