@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "dist": "build --linux snap",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -17,7 +18,8 @@
   "author": "Sanket Chaudhari",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^8.2.1"
+    "electron": "^8.2.1",
+    "electron-builder": "^22.4.1"
   },
   "dependencies": {
     "eslint": "^6.8.0",
