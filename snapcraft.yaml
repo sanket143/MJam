@@ -1,0 +1,11 @@
+name: mjam
+base: core18
+version: '0.1.0-beta'
+summary: An MP3 Player
+description: |
+  An MP3 Player 
+grade: devel
+confinement: strict
+icon: assets/mjam-log_512x512.png
+license: MIT
+
