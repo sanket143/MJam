@@ -1,4 +1,5 @@
 const state = require("../state")
+const { saveCache, saveSettings } = require("../methods")
 
 const nowplaying_frame = new Vue({
   el: "#nowplaying",
@@ -17,7 +18,7 @@ const nowplaying_frame = new Vue({
     },
     onRepeatChange(){
       state.nowplaying.instance.loop(state.settings.repeat)
-      console.log(state.settings.repeat)
+      saveSettings()
       return state.settings.repeat
     }
   },
@@ -30,6 +31,11 @@ const nowplaying_frame = new Vue({
     },
     toggleRepeat(){
       state.settings.repeat = !state.settings.repeat
+    },
+    toggleLoved(){
+      state.nowplaying.song.loved = !state.nowplaying.song.loved
+      state.songsMap[this.song.src].loved = this.song.loved
+      saveCache()
     }
   }
 })
