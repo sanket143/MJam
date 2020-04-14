@@ -1,4 +1,5 @@
 const state = require("../state")
+const { remote } = require("electron")
 
 const title_frame = new Vue({
   el: ".title-bar",
@@ -14,6 +15,20 @@ const title_frame = new Vue({
       }
 
       return title
+    }
+  },
+  methods: {
+    close(){
+      const _window = remote.BrowserWindow.getFocusedWindow()
+      _window.close()
+    },
+    minimize(){
+      const _window = remote.BrowserWindow.getFocusedWindow()
+      _window.minimize()
+    },
+    maximize(){
+      const _window = remote.BrowserWindow.getFocusedWindow()
+      _window.isMaximized() ? _window.unmaximize() : _window.maximize()
     }
   }
 })

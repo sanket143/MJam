@@ -24,9 +24,9 @@
       <h6 class="song-title">{{ title }}</h6>
 
       <div class="action-buttons">
-        <span class="minimize"><i class="material-icons">remove</i></span>
-        <span class="restore"><i class="material-icons">crop_landscape</i></span>
-        <span class="close"><i class="material-icons">close</i></span>
+        <span class="minimize" @click="minimize"><i class="material-icons">remove</i></span>
+        <span class="restore" @click="maximize"><i class="material-icons">crop_landscape</i></span>
+        <span class="close" @click="close"><i class="material-icons">close</i></span>
       </div>
     </div>
     <div class="title-spacer" height="29px">
