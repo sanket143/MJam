@@ -30,7 +30,7 @@ const state = new Vue({
   },
   computed: {
     recentSongs(){
-      return this.recentSongSources.map((source) => this.songsMap[source])
+      return this.recentSongSources.map((source) => this.songsMap[source]).filter(Boolean)
     },
     artistsMap(){
       let obj = {}

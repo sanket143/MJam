@@ -49,7 +49,7 @@ const content_frame = new Vue({
       return state.recentSongs
     },
     loved_songs(){
-      return state.playlists.loved.map(src => state.songsMap[src])
+      return state.playlists.loved.map(src => state.songsMap[src]).filter(Boolean)
     }
   },
   methods: {

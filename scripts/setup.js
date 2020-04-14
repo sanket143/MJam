@@ -25,7 +25,7 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
     .catch((err) => {
       console.log(err)
 
-      let finder = findit(state.lookupLocation)
+      let finder = findit(state.settings.lookupLocation)
 
       finder.on('file', (file) => {
         if (path.extname(file) == ".mp3") {
