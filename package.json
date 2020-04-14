@@ -1,6 +1,6 @@
 {
   "name": "mjam",
-  "version": "1.0.0",
+  "version": "0.1.0-beta",
   "description": "An MP3 Player",
   "main": "main.js",
   "scripts": {
