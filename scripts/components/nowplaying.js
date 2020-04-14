@@ -42,7 +42,7 @@ const nowplaying_frame = new Vue({
       if(index == -1){
         state.playlists.loved.push(song_src)
       } else {
-        state.playlists.loved.splice(index, 1) 
+        state.playlists.loved.splice(index, 1)
       }
 
       savePlaylists()
