@@ -1,4 +1,5 @@
 # [MJam](https://sanket143.github.io/MJam)
+[![Build Status](https://travis-ci.org/sanket143/MJam.svg?branch=master)](https://travis-ci.org/sanket143/MJam)
 
 A Modern MP3 Player
 
