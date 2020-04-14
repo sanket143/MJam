@@ -23,6 +23,9 @@ const state = new Vue({
       completion: 0,
       instance: false,
       tracker: false
+    },
+    playlists: {
+      loved: []
     }
   },
   computed: {
@@ -64,7 +67,7 @@ const state = new Vue({
         loop: this.repeat
       })
 
-      // When song is paused
+      // When song starts playing
       this.nowplaying.instance.on("play", () => {
         this.nowplaying.tracker = setInterval(() => {
           this.nowplaying.completion =

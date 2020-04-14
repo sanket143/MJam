@@ -5,8 +5,8 @@ var state = require("./scripts/state")
 var constants = require("./scripts/constants")
 var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/methods");
 
-// Fetch list of files from the computer
 (async function () {
+  // Get users settings configuration
   await readJSON(constants.SETTINGS_FILE_SRC)
     .then((jsonData) => {
       state.settings.lookupLocation = jsonData["lookupLocation"]
@@ -16,6 +16,7 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
       state.settings.lookupLocation = path.resolve(process.env["HOME"], "Music")
     })
 
+  // Get all songs
   await readJSON(constants.CACHED_FILE_SRC)
     .then((jsonData) => {
       state.allFiles = Object.keys(jsonData)
@@ -38,11 +39,20 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
       })
     })
 
-  // Get Recently Played Songs
+  // Get Recently Played songs
   await readJSON(constants.RECENT_SONGS_FILE_SRC)
     .then((jsonData) => {
       state.recentSongSources = jsonData
       state.load([jsonData[0]])
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+  // Get playlists
+  await readJSON(constants.PLAYLISTS_FILE_SRC)
+    .then((jsonData) => {
+      state.playlists.loved = jsonData.loved ? jsonData.loved : []
     })
     .catch((err) => {
       console.log(err)

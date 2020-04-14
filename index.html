@@ -41,10 +41,6 @@
               <i class="material-icons">home</i>
               <span>Home</span>
             </a>
-            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'playlists'}" v-on:click="updateFrame('playlists')">
-              <i class="material-icons">playlist_play</i>
-              <span>Playlists</span>
-            </a>
             <a class="sidebar-button" v-bind:class="{'is-active': frame === 'loved'}" v-on:click="updateFrame('loved')">
               <i class="material-icons">favorite</i>
               <span>Loved</span>
@@ -88,6 +84,25 @@
               <h4 class="label">Recently Played</h4>
               <transition-group name="list-complete" tag="div" class="songs-list" id="recent-home-section">
                 <div class="song list-complete-item" v-for="song in recent_songs" v-bind:key="song.src">
+                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
+                    <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
+                      <i class="material-icons">play_circle_outline</i>
+                    </div>
+                    <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
+                      <i class="material-icons">pause_circle_outline</i>
+                    </div>
+                  </div>
+                  <div class="song-desc">
+                    <h6 class="song-title">{{ song.title }}</h6>
+                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">{{ song.artists.join(', ') }}</h5>
+                  </div>
+                </div>
+              </transition-group>
+            </div>
+            <div key="loved" v-else-if="frame == 'loved'">
+              <h4 class="label">Loved Songs</h4>
+              <transition-group name="fade" tag="div" class="songs-list" id="recent-home-section">
+                <div class="song list-complete-item" v-for="song in loved_songs" v-bind:key="song.src">
                   <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
                     <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
@@ -195,7 +210,7 @@
           <div class="now-playing-options">
               <input type="hidden" :value="onRepeatChange">
               <button id="repeat" :class="{active: repeat === true}" @click="toggleRepeat()"><i class="material-icons">repeat</i></button>
-              <button id="loved" v-bind:class="{active: song.loved === true}" @click="toggleLoved"><i class="material-icons">favorite</i></button>
+              <button id="loved" v-bind:class="{active: loved === true}" @click="toggleLoved"><i class="material-icons">favorite</i></button>
           </div>
         </div>
       </div>

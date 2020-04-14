@@ -67,6 +67,20 @@ const saveSettings = async () => {
   })
 }
 
+const savePlaylists = async () => {
+  fs.mkdir(path.dirname(constants.PLAYLISTS_FILE_SRC), {
+    recursive: true
+  }, () => {
+    fs.writeFile(
+      constants.PLAYLISTS_FILE_SRC,
+      JSON.stringify(state.playlists),
+      (err) => {
+        if (err) {
+          console.log(err)
+        }
+      })
+  })
+}
 const extractAndStoreMetaTags = async () => {
   for (var i in state.allFiles) {
     let mp3File = state.allFiles[i]
@@ -125,6 +139,7 @@ module.exports = {
   extractAndStoreMetaTags,
   saveRecentSongs,
   reScanDirectory,
+  savePlaylists,
   saveSettings,
   saveCache,
   readJSON

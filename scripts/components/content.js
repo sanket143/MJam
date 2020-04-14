@@ -42,10 +42,14 @@ const content_frame = new Vue({
       return state.contentFrame
     },
     all_songs(){
+      console.log("Updated")
       return Object.values(state.songsMap)
     },
     recent_songs(){
       return state.recentSongs
+    },
+    loved_songs(){
+      return state.playlists.loved.map(src => state.songsMap[src])
     }
   },
   methods: {

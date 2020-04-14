@@ -1,9 +1,12 @@
 const state = require("../state")
-const { saveCache, saveSettings } = require("../methods")
+const { savePlaylists, saveSettings } = require("../methods")
 
 const nowplaying_frame = new Vue({
   el: "#nowplaying",
   computed: {
+    loved(){
+      return state.playlists.loved.indexOf(this.song.src) != -1
+    },
     repeat(){
       return state.settings.repeat
     },
@@ -33,9 +36,16 @@ const nowplaying_frame = new Vue({
       state.settings.repeat = !state.settings.repeat
     },
     toggleLoved(){
-      state.nowplaying.song.loved = !state.nowplaying.song.loved
-      state.songsMap[this.song.src].loved = this.song.loved
-      saveCache()
+      let song_src = this.song.src
+      let index = state.playlists.loved.indexOf(song_src)
+
+      if(index == -1){
+        state.playlists.loved.push(song_src)
+      } else {
+        state.playlists.loved.splice(index, 1) 
+      }
+
+      savePlaylists()
     }
   }
 })
