@@ -73,7 +73,6 @@ const state = new Vue({
           this.nowplaying.completion =
           this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10)
         }, 100)
-        this.nowplaying.src = this.nowplaying.song.src
       })
 
       // When song is paused
@@ -120,6 +119,8 @@ const state = new Vue({
       } else {
         this.nowplaying.ids.push(this.nowplaying.instance.play())
       }
+
+      this.nowplaying.src = this.nowplaying.song.src
     },
     pause(){
       for(i in this.nowplaying.ids){
