@@ -5,7 +5,7 @@ const title_frame = new Vue({
   el: ".title-bar",
   computed: {
     title: function () {
-      let title = "MJam - A Modern Music Player"
+      let title = "MJam - An MP3 Player"
       if (state.nowplaying.song && state.nowplaying.song.title) {
         title = state.nowplaying.song.title
 

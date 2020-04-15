@@ -1,4 +1,4 @@
-name: mjam
+name: MJam
 base: core18
 version: '0.1.0-beta'
 summary: An MP3 Player
