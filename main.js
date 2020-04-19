@@ -9,6 +9,7 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    icon: path.resolve(__dirname, "/assets/mjam-log_512x512.png"),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true
