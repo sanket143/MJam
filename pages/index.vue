@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <div>
-      <h1>Your Song</h1>
+      <div class="search-wrapper">
+        <feather class="search icon" type="search" />
+        <input class="search">
+      </div>
     </div>
   </div>
 </template>
@@ -16,4 +19,8 @@ export default {}
 @apply min-h-screen flex justify-center items-center text-center mx-auto;
 }
 */
+
+.search {
+  @apply p-1;
+}
 </style>
