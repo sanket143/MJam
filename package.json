@@ -1,32 +1,28 @@
 {
-  "name": "MJam",
-  "version": "0.1.3-beta",
-  "description": "An MP3 Player",
-  "main": "main.js",
+  "name": "mjam",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "start": "electron .",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "dist:snap": "electron-builder --linux snap",
-    "dist:deb": "electron-builder --linux deb"
-  },
-  "repository": "https://github.com/sanket143/mjam",
-  "keywords": [
-    "MP3",
-    "Media",
-    "Player"
-  ],
-  "author": "Sanket Chaudhari",
-  "email": "chaudharisanket2000@gmail.com",
-  "url": "https://github.com/sanket143/mjam",
-  "license": "MIT",
-  "devDependencies": {
-    "electron": "^8.2.4",
-    "electron-builder": "^22.4.1"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "tauri": "tauri",
+    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint": "npm run lint:js"
   },
   "dependencies": {
-    "eslint": "^6.8.0",
-    "findit": "^2.0.0",
-    "music-metadata": "^6.3.7"
+    "@nuxtjs/axios": "^5.12.0",
+    "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "nuxt": "^2.14.0",
+    "tauri": "^0.11.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config": "^3.1.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxtjs/tailwindcss": "^2.1.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.5.0",
+    "eslint-plugin-nuxt": "^1.0.0"
   }
 }

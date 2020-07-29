@@ -1,17 +1,20 @@
-# [MJam](https://sanket143.github.io/MJam)
-[![Build Status](https://travis-ci.org/sanket143/MJam.svg?branch=master)](https://travis-ci.org/sanket143/MJam)
-[![mjam](https://snapcraft.io//mjam/badge.svg)](https://snapcraft.io/mjam)
+# mjam
 
-A Modern MP3 Player
+## Build Setup
 
-### **Run in development**
-```shell
-$ git clone https://github.com/sanket143/MJam.git
-$ cd MJam
+```bash
+# install dependencies
 $ npm install
-$ npm start
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+# generate static project
+$ npm run generate
 ```
 
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/mjam)
-
-[MIT License](LICENSE)
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
