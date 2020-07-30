@@ -2,8 +2,11 @@
   <div class="container">
     <div>
       <div class="search-wrapper">
-        <feather class="search icon" type="search" />
-        <input class="search">
+        <feather class="search-icon mr-1" type="search" />
+        <input
+          class="search"
+          placeholder="Search song, artist or album"
+        >
       </div>
     </div>
   </div>
@@ -20,7 +23,17 @@ export default {}
 }
 */
 
+.search-wrapper {
+  @apply flex flex-row items-center ml-2;
+}
+
+.search-icon {
+  @apply text-gray-500 w-4;
+}
+
 .search {
-  @apply p-1;
+  @apply p-1 text-sm outline-none text-gray-700;
+  width: 400px;
+  font-family: 'Ubuntu', sans-serif;
 }
 </style>

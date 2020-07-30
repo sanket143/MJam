@@ -11,7 +11,8 @@
 <style>
 @font-face {
   font-family: 'Quicksand';
-  src: url('/fonts/Quicksand/Quicksand-VariableFont_wght.ttf');
+  font-display: swap;
+  src: url('/fonts/Quicksand/Quicksand-Regular.ttf');
 }
 
 @font-face {
@@ -23,6 +24,7 @@ html {
   font-family: 'Salsa', cursive;
   font-size: 16px;
   word-spacing: 1px;
+  letter-spacing: 2px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -moz-osx-font-smoothing: grayscale;
