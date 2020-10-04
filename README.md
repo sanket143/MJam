@@ -9,6 +9,7 @@ A Modern MP3 Player
 $ git clone https://github.com/sanket143/MJam.git
 $ cd MJam
 $ npm install
+$ npm install -g electron
 $ npm start
 ```
 
