@@ -24,12 +24,17 @@ var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/method
     })
     .catch((err) => {
       console.log(err)
+      let firstSongSet = false
 
       let finder = findit(state.settings.lookupLocation)
 
       finder.on('file', (file) => {
         if (path.extname(file) == ".mp3") {
           state.allFiles.push(file)
+          if(!firstSongSet) {
+            state.load([state.allFiles[0]])
+            firstSongSet = true
+          }
         }
       })
 
