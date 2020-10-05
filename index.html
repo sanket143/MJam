@@ -161,11 +161,20 @@
             <div key="settings" v-else-if="frame == 'settings'">
               <h4 class="label">Settings</h4>
               <div id="settings-section">
-                <input class="mj-input" type="text" v-model="lookupDir">
-                <input type="hidden" v-model="init">
-                <button @click="reScan" class="mj-rescan">
-                  Rescan
-                </button>
+
+                <div style='margin-bottom: 1em;'>
+                  <input class="mj-input" type="text" v-model="lookupDir">
+                  <input type="hidden" v-model="init">
+                  <button @click="reScan" class="mj-rescan">
+                    Rescan
+                  </button>
+                </div>
+                <div>
+                  <input placeholder="Username" class="mj-input" type="text">
+                  <button class="mj-rescan">
+                    Set username
+                  </button>
+                </div>
               </div>
             </div>
           </transition-group>
