@@ -22,7 +22,8 @@ const state = new Vue({
       song: {},
       completion: 0,
       instance: false,
-      tracker: false
+      tracker: false,
+      //currentTime=document.getElementById("currentTime")
     },
     playlists: {
       loved: []
@@ -56,6 +57,7 @@ const state = new Vue({
     }
   },
   methods: {
+    
     stop(){
       for(i in this.nowplaying.ids){
         this.nowplaying.instance.stop(this.nowplaying.ids[i])
@@ -73,6 +75,7 @@ const state = new Vue({
           this.nowplaying.completion =
           this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10)
         }, 100)
+       
       })
 
       // When song is paused
@@ -80,6 +83,8 @@ const state = new Vue({
         this.nowplaying.src = ""
         clearInterval(this.nowplaying.tracker)
       })
+      
+      
 
       // When the song ends
       this.nowplaying.instance.on("end", () => {
@@ -90,6 +95,7 @@ const state = new Vue({
 
       this.nowplaying.song = this.songsMap[sources[0]]
     },
+    
     play(sources){
       if(sources && this.nowplaying.song.src !== sources[0]){
 
@@ -125,9 +131,11 @@ const state = new Vue({
     pause(){
       for(i in this.nowplaying.ids){
         this.nowplaying.instance.pause(this.nowplaying.ids[i])
+        
       }
     }
   }
-})
+});
+
 
 module.exports = state

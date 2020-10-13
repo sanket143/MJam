@@ -32,6 +32,9 @@ const nowplaying_frame = new Vue({
     play() {
       state.play()
     },
+    seek(){
+      state.seek()
+    },
     toggleRepeat(){
       state.settings.repeat = !state.settings.repeat
     },
@@ -44,7 +47,6 @@ const nowplaying_frame = new Vue({
       } else {
         state.playlists.loved.splice(index, 1)
       }
-
       savePlaylists()
     }
   }

@@ -23,6 +23,7 @@
 }
 .now-playing-wrapper .now-playing-track .now-playing-details .now-playing-track-title, .now-playing-wrapper .now-playing-track .now-playing-details .now-playing-track-artist {
   margin: 0;
+  
 }
 
 .now-playing-wrapper .now-playing-track .now-playing-details .now-playing-track-title {
@@ -59,32 +60,79 @@
 }
 #nowplaying .seekbar-wrapper {
   flex: 1;
-  display: inline-flex;
-  align-items: center;
+  /* display: inline-flex;
+  align-items: center;  */
   width: 100%;
-  position: fixed;
-  bottom: 74px;
+  position: absolute;
+  bottom: 76px;
   z-index: 1;
+  cursor: pointer;
+  transition: 0.2s;
+  left: -0.5%;
 }
-#nowplaying .seekbar-wrapper .seekbar-cover {
+/*progress*/
+#nowplaying .seekbar-wrapper .seekbar-cover input[type="range"] {
+  position: absolute;
   width: 100%;
-  height: 14px;
+  height: 3px;
   cursor: pointer;
   background-color: transparent;
   display: inline-flex;
   align-items: center;
+  
 }
-.seekbar-wrapper .seekbar {
+#nowplaying .seekbar-wrapper .seekbar-cover input[type="range"] ::-webkit-slider-thumb {
+
+    -webkit-appearance: none !important;
+    position: relative;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    background: #eb6d7f;
+    transition: 0.5s ease-in-out forwards;
+    cursor: pointer;
+    opacity: 0;
+}
+#nowplaying .seekbar-wrapper .seekbar input[type="range"]:hover ::-webkit-slider-thumb {
+
+  transition: 0.2s;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  margin-left: 20%;
+  background-color: #eb6d7f;
+  margin-top: -9px;
+  transform: translateX(-7px);
+
+}
+#currentTime{
+  font-family: fantasy;
+  font-size: 14px;
+  position: absolute;
+  top: 92%;
+  left: 30;
+  
+}
+.seekbar-wrapper .seekbar input[type="range"]{
   height: 3px;
   width: 100%;
   background-color: #ebebeb;
+  -webkit-appearance: none !important;
+  
 }
-.seekbar-wrapper .progress {
+.seekbar-wrapper .seekbar {
+
+  height: 3px;
+  width: 100%;
+  background-color: #ebebeb;
+  
+}
+ .seekbar-wrapper .progress {
   transition: 0.2s;
   height: 3px;
   width: 20%;
   background-color: #eb6d7f;
-}
+}/*
 .seekbar-wrapper .handle {
   transition: 0.2s;
   height: 14px;
@@ -94,11 +142,11 @@
   background-color: #eb6d7f;
   margin-top: -9px;
   transform: translateX(-7px);
-}
-
+} */
+/*
 .seekbar-wrapper .seektime {
     margin-left: 10px;
-}
+}*/
 .now-playing-wrapper .now-playing-options {
   margin: 0 10px;
   display: flex;

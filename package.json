@@ -1,5 +1,5 @@
 {
-  "name": "MJam",
+  "name": "mjam",
   "version": "0.1.3-beta",
   "description": "An MP3 Player",
   "main": "main.js",
