@@ -59,12 +59,12 @@ const state = new Vue({
       let duration = Math.floor(this.nowplaying.elapsed)
       let min = Math.floor(duration / 60)
       let sec = Math.floor(duration % 60)
-      let completion = min.toString().padStart(2,"0") + ":" + sec.toString().padStart(2,"0")
+      let completion = min.toString().padStart(2, "0") + ":" + sec.toString().padStart(2, "0")
 
       duration = Math.floor(this.nowplaying.instance.duration())
       min = Math.floor(duration / 60)
       sec = Math.floor(duration % 60)
-      let length = min.toString().padStart(2,"0") + ":" + sec.toString().padStart(2,"0")
+      let length = min.toString().padStart(2, "0") + ":" + sec.toString().padStart(2, "0")
 
       status = completion + "/" + length
       return status
@@ -143,7 +143,7 @@ const state = new Vue({
       for(i in this.nowplaying.ids){
         this.nowplaying.instance.pause(this.nowplaying.ids[i])
       }
-    }
+    },
   }
 })
 
