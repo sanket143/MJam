@@ -87,7 +87,7 @@ const state = new Vue({
         this.nowplaying.tracker = setInterval(() => {
           this.nowplaying.elapsed = this.nowplaying.instance.seek()
           this.nowplaying.completion =
-          this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10)
+          this.nowplaying.instance.seek() * 100 / this.nowplaying.instance.duration()
         }, 100)
       })
 
