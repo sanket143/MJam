@@ -218,6 +218,7 @@
           </div>
           <div class="now-playing-options">
               <input type="hidden" :value="onRepeatChange">
+              <p>{{ state.completionStatus }}</p>
               <button id="repeat" :class="{active: repeat === true}" @click="toggleRepeat()"><i class="material-icons">repeat</i></button>
               <button id="loved" v-bind:class="{active: loved === true}" @click="toggleLoved"><i class="material-icons">favorite</i></button>
           </div>

@@ -20,6 +20,7 @@ const state = new Vue({
       ids: [],
       src: "",
       song: {},
+      elapsed: 0,
       completion: 0,
       instance: false,
       tracker: false
@@ -53,6 +54,20 @@ const state = new Vue({
       })
 
       return arr
+    },
+    completionStatus(){
+      let duration = Math.floor(this.nowplaying.elapsed)
+      let min = Math.floor(duration / 60)
+      let sec = Math.floor(duration % 60)
+      let completion = min.toString().padStart(2,"0") + ":" + sec.toString().padStart(2,"0")
+
+      duration = Math.floor(this.nowplaying.instance.duration())
+      min = Math.floor(duration / 60)
+      sec = Math.floor(duration % 60)
+      let length = min.toString().padStart(2,"0") + ":" + sec.toString().padStart(2,"0")
+
+      status = completion + "/" + length
+      return status
     }
   },
   methods: {
@@ -70,6 +85,7 @@ const state = new Vue({
       // When song starts playing
       this.nowplaying.instance.on("play", () => {
         this.nowplaying.tracker = setInterval(() => {
+          this.nowplaying.elapsed = this.nowplaying.instance.seek()
           this.nowplaying.completion =
           this.nowplaying.instance.seek() * 1000 / (this.nowplaying.instance.duration() * 10)
         }, 100)
