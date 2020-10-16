@@ -100,6 +100,7 @@ const state = new Vue({
       // When the song ends
       this.nowplaying.instance.on("end", () => {
         this.nowplaying.src = ""
+        this.nowplaying.elapsed = 0
         this.nowplaying.completion = 0
         clearInterval(this.nowplaying.tracker)
       })
