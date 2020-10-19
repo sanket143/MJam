@@ -74,6 +74,7 @@
   display: inline-flex;
   align-items: center;
 }
+
 .seekbar-wrapper .seekbar {
   height: 3px;
   width: 100%;

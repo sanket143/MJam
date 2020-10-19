@@ -3,6 +3,9 @@ const { savePlaylists, saveSettings } = require("../methods")
 
 const nowplaying_frame = new Vue({
   el: "#nowplaying",
+  data: {
+    tym: ""
+  },
   computed: {
     loved(){
       return state.playlists.loved.indexOf(this.song.src) != -1
@@ -34,6 +37,9 @@ const nowplaying_frame = new Vue({
     },
     toggleRepeat(){
       state.settings.repeat = !state.settings.repeat
+    },
+    seek(){
+      // state.seek(tym)
     },
     toggleLoved(){
       let song_src = this.song.src
