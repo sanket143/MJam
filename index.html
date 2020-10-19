@@ -22,7 +22,6 @@
         <span>MJam</span>
       </h6>
       <h6 class="song-title">{{ title }}</h6>
-
       <div class="action-buttons">
         <span class="minimize" @click="minimize"><i class="material-icons">remove</i></span>
         <span class="restore" @click="maximize"><i class="material-icons">crop_landscape</i></span>
@@ -194,11 +193,13 @@
 
     <div id="bottom-frame">
       <div id="nowplaying" v-if="song.title != undefined" v-cloak>
-        <div class="seekbar-wrapper">
+        <div class="seekbar-wrapper" >
             <div class="seekbar-cover">
                 <div class="seekbar">
-                    <div class="progress" :style="{ 'width': completion + '%'}"></div>
-                    <div class="handle" :style="{ 'margin-left': completion + '%'}"></div>
+                    <div class="progress" :style="{ 'width': completion + '%'}" >
+                      <input type="range" min="0" max="100" v-model="tym" @change="seek" style="opacity: 0;" >
+                    </div>
+                    <div class="handle" :style="{ 'margin-left': completion + '%'}" ></div>
                 </div>
             </div>
         </div>
@@ -224,7 +225,7 @@
         </div>
       </div>
     </div>
-
+    </script>
     <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/setup.js"></script>
   </body>

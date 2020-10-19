@@ -126,6 +126,9 @@ const state = new Vue({
       for(i in this.nowplaying.ids){
         this.nowplaying.instance.pause(this.nowplaying.ids[i])
       }
+    },
+    seek(){
+      this.nowplaying.instance.seek(duration)
     }
   }
 })
