@@ -22,7 +22,12 @@
         <span>MJam</span>
       </h6>
       <h6 class="song-title">{{ title }}</h6>
-
+      <div>
+        <input type="checkbox" class="checkbox" id="chk" />
+        <label class="mode" for="chk">
+          <div class="ball"></div>
+        </label>
+      </div>
       <div class="action-buttons">
         <span class="minimize" @click="minimize"><i class="material-icons">remove</i></span>
         <span class="restore" @click="maximize"><i class="material-icons">crop_landscape</i></span>
@@ -224,7 +229,6 @@
         </div>
       </div>
     </div>
-
     <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/setup.js"></script>
   </body>
