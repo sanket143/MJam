@@ -25,7 +25,6 @@
     "electron-builder": "^22.4.1"
   },
   "dependencies": {
-    "darkmode-js": "^1.5.7",
     "eslint": "^6.8.0",
     "findit": "^2.0.0",
     "music-metadata": "^6.3.7"
