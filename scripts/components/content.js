@@ -5,7 +5,8 @@ const content_frame = new Vue({
   el: "#content",
   data: {
     search_query: "",
-    lookupDir: ""
+    lookupDir: "",
+    currentTheme: localStorage.getItem('theme-color')
   },
   computed: {
     init(){
@@ -58,6 +59,17 @@ const content_frame = new Vue({
       state.settings.lookupLocation = this.lookupDir
       reScanDirectory()
     },
+    switchTheme(){
+      const storedTheme = localStorage.getItem('theme-color')
+      if(storedTheme ==='theme-dark'){
+        localStorage.setItem('theme-color', 'theme-light')
+        this.currentTheme =localStorage.getItem('theme-color')
+      }
+      else{
+        localStorage.setItem('theme-color', 'theme-dark')
+        this.currentTheme =localStorage.getItem('theme-color')
+      }
+    },
     playMe: function (src) {
       state.play([src])
     },
@@ -74,7 +86,7 @@ const content_frame = new Vue({
   },
   mounted(){
     this.lookupDir = state.settings.lookupLocation
-  }
+  },
 })
 
 window.global = {
