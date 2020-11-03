@@ -5,6 +5,12 @@ var state = require("./scripts/state")
 var constants = require("./scripts/constants")
 var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/methods");
 
+// Spacebar to pause/play song
+document.addEventListener("keypress",function(){
+  if(event.keyCode==32)
+    document.getElementById("toggle").click();
+});
+
 (async function () {
   // Get users settings configuration
   await readJSON(constants.SETTINGS_FILE_SRC)
