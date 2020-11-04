@@ -22,7 +22,6 @@
         <span>MJam</span>
       </h6>
       <h6 class="song-title">{{ title }}</h6>
-
       <div class="action-buttons">
         <span class="minimize" @click="minimize"><i class="material-icons">remove</i></span>
         <span class="restore" @click="maximize"><i class="material-icons">crop_landscape</i></span>
@@ -55,7 +54,7 @@
             </a>
           </div>
         </div>
-        <div id="content">
+        <div id="content" v-bind:class="currentTheme">
           <div class="search-bar">
             <i class="material-icons">search</i>
             <input v-model="search_query" placeholder="Search songs, artists and albums..." type="text" id="search">
@@ -160,8 +159,14 @@
             </div>
             <div key="settings" v-else-if="frame == 'settings'">
               <h4 class="label">Settings</h4>
+              <div class="theme-switcher-wrap">DARK MODE
+                <div class="theme-switcher">
+                  <div class="switch-path">
+                    <div class="switch-handle"  v-bind:class="{'active1':currentTheme ==='theme-dark'}" v-on:click="switchTheme"></div>
+                  </div>
+                </div>
+              </div>
               <div id="settings-section">
-
                 <div style='margin-bottom: 1em;'>
                   <input class="mj-input" type="text" v-model="lookupDir">
                   <input type="hidden" v-model="init">
@@ -224,7 +229,6 @@
         </div>
       </div>
     </div>
-
     <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/setup.js"></script>
   </body>

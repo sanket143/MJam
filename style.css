@@ -1,9 +1,9 @@
 html, body {
   padding: 0;
   margin: 0;
-  color: #353535;
   height: -webkit-fill-available;
   font-family: 'Source Sans Pro', sans-serif;
+  color: #222;
 }
 
 body {
@@ -35,6 +35,40 @@ button, input {
   background: #eb6d7f;
   color: white;
   border-radius: 2px;
+}
+.theme-switcher-wrap{
+  width: 100%;
+  display: flex;
+  color: #eb6d7f;
+  margin-bottom: 15px;
+  align-items: center;
+  font-family: Salsa, sans-serif;
+}
+.theme-switcher{
+  margin-left: 12px;
+  display: inline-block;
+  cursor: pointer;
+}
+.switch-path{
+  margin-top: 3px;
+  width: 42px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: rgb(138, 130, 130);
+}
+.switch-handle{
+  background-color: rgb(87, 84, 84);
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  transition: all 0.3s ease-in-out;
+}
+/* .switch-path.active1{
+background-color: #555;
+} */
+.switch-handle.active1{
+transform: translateX(25px);
+background-color: rgb(252, 248, 248);
 }
 
 /* latin */
@@ -111,6 +145,11 @@ button, input {
   width: 100vw;
 }
 
+.title-bar.theme-dark {
+  background-color: #000000;
+  color: white;
+}
+
 .title-bar .brand-logo {
   cursor: pointer;
   width: fit-content;
@@ -179,9 +218,15 @@ button, input {
 
 #sidebar {
   height: 100%;
+  /* background-color: white; */
+  color: #000000;
   padding-left: 50px;
   padding-right: 50px;
   font-family: Salsa, sans-serif;
+}
+#sidebar.theme-dark {
+  background-color: #000000;
+  color: white;
 }
 
 #sidebar .label {
@@ -231,6 +276,12 @@ button, input {
 
 #content {
   padding-left: 40px;
+  color: #000000;
+}
+#content.theme-dark{
+  padding-left: 40px;
+  background: #101010;
+  color: white;
 }
 
 /* Search Bar */
@@ -248,7 +299,7 @@ button, input {
   width: 100%;
 }
 
-/* Main Frame */
+/* Main Frame */ 
 #content .main-frame #recent-home-section {
   height: calc(100vh - 80px - 148px);
 }
