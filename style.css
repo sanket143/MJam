@@ -38,9 +38,11 @@ button, input {
 }
 .theme-switcher-wrap{
   width: 100%;
-  font-family: Salsa, sans-serif;
+  display: flex;
   color: #eb6d7f;
-  margin-bottom: 35px;
+  margin-bottom: 15px;
+  align-items: center;
+  font-family: Salsa, sans-serif;
 }
 .theme-switcher{
   margin-left: 12px;
@@ -278,7 +280,7 @@ background-color: rgb(252, 248, 248);
 }
 #content.theme-dark{
   padding-left: 40px;
-  background: #000000;
+  background: #101010;
   color: white;
 }
 
