@@ -3,6 +3,7 @@ const { remote } = require("electron")
 
 const title_frame = new Vue({
   el: ".title-bar",
+
   computed: {
     title: function () {
       let title = "MJam - An MP3 Player"
