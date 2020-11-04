@@ -129,7 +129,7 @@ const state = new Vue({
       }
     },
     toggle_volume(v){
-      this.nowplaying.instance.volume(v/100);
+      Howler.volume(v/100);
       document.getElementById("volume").style.background = 'linear-gradient(90deg, #eb6d7f '+v+'%, #d3d3d3 '+v+'%)';
     }
   }
