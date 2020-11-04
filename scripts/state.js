@@ -64,7 +64,8 @@ const state = new Vue({
     load(sources){
       this.nowplaying.instance = new Howl({
         src: sources,
-        loop: this.repeat
+        loop: this.repeat,
+        volume: 1
       })
 
       // When song starts playing
@@ -126,6 +127,10 @@ const state = new Vue({
       for(i in this.nowplaying.ids){
         this.nowplaying.instance.pause(this.nowplaying.ids[i])
       }
+    },
+    toggle_volume(v){
+      this.nowplaying.instance.volume(v/100);
+      document.getElementById("volume").style.background = 'linear-gradient(90deg, #eb6d7f '+v+'%, #d3d3d3 '+v+'%)';
     }
   }
 })

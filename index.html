@@ -209,13 +209,15 @@
           </div>
           <div class="now-playing-options">
               <input type="hidden" :value="onRepeatChange">
+              <img id="volume_icon" src="./assets/volume-buttons/volume_full.png" onclick="change_volume()" width="23" height="23"></img>
+              <input id="volume" class="volume-tweak" type="range" min="0" max="100" value="100" oninput="change_tweaker()"/>
               <button id="repeat" :class="{active: repeat === true}" @click="toggleRepeat()"><i class="material-icons">repeat</i></button>
               <button id="loved" v-bind:class="{active: loved === true}" @click="toggleLoved"><i class="material-icons">favorite</i></button>
           </div>
         </div>
       </div>
     </div>
-
+    
     <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/setup.js"></script>
   </body>

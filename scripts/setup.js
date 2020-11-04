@@ -4,12 +4,43 @@ var findit = require("findit")
 var state = require("./scripts/state")
 var constants = require("./scripts/constants")
 var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/methods");
+var count=0;
 
 // Spacebar to pause/play song
 document.addEventListener("keypress",function(){
   if(event.keyCode==32)
     document.getElementById("toggle").click();
 });
+
+// Mute Volume or Full Volume by clicking on volume icon
+function change_volume(){
+  count++;
+  var imag = document.getElementById("volume_icon");
+  var tweaker = document.getElementById("volume");
+  if(count%2==1)
+  {
+    imag.src = "./assets/volume-buttons/volume_muted.png";
+    tweaker.value = "0";
+    state.toggle_volume(tweaker.value); // mute volume
+  }
+  else{
+    imag.src = "./assets/volume-buttons/volume_full.png";
+    tweaker.value = "100";
+    state.toggle_volume(tweaker.value) // full volume
+  }
+}
+
+// Change volume using Volume Tweaker
+function change_tweaker()
+{
+  var imag = document.getElementById("volume_icon");
+  var v = document.getElementById("volume");
+  if(v.value==0)
+    imag.src = "./assets/volume-buttons/volume_muted.png";
+  else
+    imag.src = "./assets/volume-buttons/volume_full.png";
+  state.toggle_volume(v.value); // toggle the volume
+}
 
 (async function () {
   // Get users settings configuration
