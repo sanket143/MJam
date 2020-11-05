@@ -44,7 +44,7 @@ const content_frame = new Vue({
     },
     all_songs(){
       console.log("Updated")
-      return Object.values(state.songsMap)
+      return Object.values(state.songsMap).sort() //Now we have sorted list of all_songs
     },
     recent_songs(){
       return state.recentSongs
