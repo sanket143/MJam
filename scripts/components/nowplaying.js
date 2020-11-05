@@ -20,9 +20,11 @@ const nowplaying_frame = new Vue({
       return state.nowplaying.song
     },
     onRepeatChange(){
-      state.nowplaying.instance.loop(state.settings.repeat)
-      saveSettings()
-      return state.settings.repeat
+      if(state.nowplaying.instance) {
+        state.nowplaying.instance.loop(state.settings.repeat)
+        saveSettings()
+        return state.settings.repeat
+      }
     }
   },
   methods: {
