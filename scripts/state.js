@@ -1,4 +1,4 @@
-const { saveRecentSongs } = require('./methods')
+const { saveRecentSongs, saveSettings } = require('./methods')
 
 const state = new Vue({
   data: {
@@ -9,7 +9,9 @@ const state = new Vue({
     contentFrame: "home",
     settings: {
       lookupLocation: "",
-      repeat: false
+      repeat: false,
+      Volume: 100,
+      V_icon: "volume_up"
     },
     frameData: {
       artist: {
@@ -64,7 +66,8 @@ const state = new Vue({
     load(sources){
       this.nowplaying.instance = new Howl({
         src: sources,
-        loop: this.repeat
+        loop: this.repeat,
+        volume: state.settings.Volume/100
       })
 
       // When song starts playing

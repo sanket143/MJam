@@ -38,6 +38,39 @@ const nowplaying_frame = new Vue({
     toggleRepeat(){
       state.settings.repeat = !state.settings.repeat
     },
+    toggleVolume(){
+      var imag = document.getElementById("volume_icon");
+      var tweaker = document.getElementById("volume");
+      if(tweaker.value!=0)
+      {
+        imag.innerHTML = "volume_off";
+        tweaker.value = "0";
+      }
+      else{
+        imag.innerHTML = "volume_up";
+        tweaker.value = "100";
+      }
+      state.settings.Volume = tweaker.value;
+      state.settings.V_icon = imag.innerHTML;
+      state.nowplaying.instance.volume(state.settings.Volume/100);
+      saveSettings();
+    },
+    Volume_Tweaker(){
+      var imag = document.getElementById("volume_icon");
+      var tweaker = document.getElementById("volume");
+      if(tweaker.value==0)
+      {
+        imag.innerHTML = "volume_off";
+      }
+      else
+      {
+        imag.innerHTML = "volume_up";
+      }
+      state.settings.Volume = tweaker.value;
+      state.settings.V_icon = imag.innerHTML;
+      state.nowplaying.instance.volume(state.settings.Volume/100);
+      saveSettings();
+    },
     toggleLoved(){
       let song_src = this.song.src
       let index = state.playlists.loved.indexOf(song_src)

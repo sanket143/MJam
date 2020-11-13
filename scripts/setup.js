@@ -17,6 +17,8 @@ document.addEventListener("keypress",function(){
     .then((jsonData) => {
       state.settings.lookupLocation = jsonData["lookupLocation"]
       state.settings.repeat = jsonData["repeat"] ? jsonData["repeat"] : false
+      state.settings.Volume = jsonData["Volume"] ? jsonData["Volume"] : 100
+      state.settings.V_icon = jsonData["V_icon"] ? jsonData["V_icon"] : "volume_up"
     }).catch((err) => {
       console.log(err)
       state.settings.lookupLocation = path.resolve(process.env["HOME"], "Music")
