@@ -123,15 +123,11 @@ const state = new Vue({
       }
 
       this.nowplaying.src = this.nowplaying.song.src
-     // this.settings.Volume = state.settings.Volume;
-     // saveSettings();
     },
     pause(){
       for(i in this.nowplaying.ids){
         this.nowplaying.instance.pause(this.nowplaying.ids[i])
       }
-     // this.settings.Volume = state.settings.Volume;
-     // saveSettings();
     }
   }
 })
