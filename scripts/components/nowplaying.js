@@ -20,9 +20,12 @@ const nowplaying_frame = new Vue({
       return state.nowplaying.song
     },
     onRepeatChange(){
-      state.nowplaying.instance.loop(state.settings.repeat)
-      saveSettings()
-      return state.settings.repeat
+      if(state.nowplaying.instance) // we have to check that nowplaying.instance is exist or not
+      {
+        state.nowplaying.instance.loop(state.settings.repeat) // If exist then change settings of repeatation
+        saveSettings()     // save the settings
+        return state.settings.repeat
+      }
     }
   },
   methods: {
