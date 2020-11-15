@@ -119,7 +119,26 @@ const state = new Vue({
         // Save Recently Played Songs
         saveRecentSongs()
       } else {
+
+        // Play the first song
         this.nowplaying.ids.push(this.nowplaying.instance.play())
+
+        let srcIndex = this.recentSongSources.indexOf(state.allFiles[0])
+        this.nowplaying.completion = 0
+
+        // Update Recently Played Songs list
+        if(srcIndex == -1){
+          this.recentSongSources.unshift(state.allFiles[0])
+          if(this.recentSongSources.length > 10){
+            this.recentSongSources.pop()
+          }
+        } else {
+          this.recentSongSources.splice(srcIndex, 1)
+          this.recentSongSources.unshift(state.allFiles[0])
+        }
+
+        // Save Recently Played Songs
+        saveRecentSongs()
       }
 
       this.nowplaying.src = this.nowplaying.song.src
