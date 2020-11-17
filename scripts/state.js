@@ -1,4 +1,4 @@
-const { saveRecentSongs, saveSettings } = require('./methods')
+const { saveRecentSongs } = require('./methods')
 
 const state = new Vue({
   data: {
