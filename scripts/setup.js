@@ -3,7 +3,7 @@ var path = require("path")
 var findit = require("findit")
 var state = require("./scripts/state")
 var constants = require("./scripts/constants")
-var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/methods");
+var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/methods")
 var i=0
 
 function compare(a, b)
@@ -13,14 +13,16 @@ function compare(a, b)
 
 function insertSorted(array, element)
 {
-  for(i=0;i<array.length && compare(array[i], element);i++) {} // find right index for inserting new file into allFiles
-  array.splice(i, 0, element)  // insert file at i'th index such that allFiles array is sorted 
+  i = 0
+  while(i<array.length && compare(array[i], element))
+    i++ // find right index for inserting new file into allFiles
+  array.splice(i, 0, element)// insert file at i'th index such that allFiles array is sorted
 }
 
 // Spacebar to pause/play song
-document.addEventListener("keypress",function(){
+document.addEventListener("keypress", function(){
   if(event.keyCode==32)
-    document.getElementById("toggle").click();
+    document.getElementById("toggle").click()
 });
 
 (async function () {
