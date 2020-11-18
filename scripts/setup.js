@@ -45,7 +45,9 @@ document.addEventListener("keypress", function(){
       })
 
       finder.on('end', async () => {
-        state.allFiles.sort(function(a, b){return a.toLowerCase()-b.toLowerCase()})
+        state.allFiles.sort(async (a, b)=>{
+          return state.songsMap[a].title.toLowerCase() < state.songsMap[b].title.toLowerCase() ? -1 : 1
+        })
         await extractAndStoreMetaTags()
         saveCache()
       })
