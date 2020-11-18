@@ -3,24 +3,12 @@ var path = require("path")
 var findit = require("findit")
 var state = require("./scripts/state")
 var constants = require("./scripts/constants")
-var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/methods");
-var i=0
-
-function compare(a, b)
-{
-  return a.toLowerCase() < b.toLowerCase()  // compare two files title with case-insensative
-}
-
-function insertSorted(array, element)
-{
-  for(i=0;i<array.length && compare(array[i], element);i++) {} // find right index for inserting new file into allFiles
-  array.splice(i, 0, element)  // insert file at i'th index such that allFiles array is sorted 
-}
+var { readJSON, saveCache, extractAndStoreMetaTags } = require("./scripts/methods")
 
 // Spacebar to pause/play song
-document.addEventListener("keypress",function(){
+document.addEventListener("keypress", function(){
   if(event.keyCode==32)
-    document.getElementById("toggle").click();
+    document.getElementById("toggle").click()
 });
 
 (async function () {
@@ -48,17 +36,16 @@ document.addEventListener("keypress",function(){
 
       finder.on('file', (file) => {
         if (path.extname(file) == ".mp3") {
-          if(!state.nowplaying.instance){
-            state.allFiles.push(file)
-            state.load(state.allFiles[0])
-          }
-          else{
-            insertSorted(state.allFiles, file)
+          state.allFiles.push(file)
+          if(!state.nowplaying.instance) // For first time nowplaying.instance not exists so we check for it
+          {
+            state.load(state.allFiles[0]) // load first song
           }
         }
       })
 
       finder.on('end', async () => {
+        state.allFiles.sort()
         await extractAndStoreMetaTags()
         saveCache()
       })
