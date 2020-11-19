@@ -17,7 +17,6 @@ document.addEventListener("keypress", function(){
     .then((jsonData) => {
       state.settings.lookupLocation = jsonData["lookupLocation"]
       state.settings.repeat = jsonData["repeat"] ? jsonData["repeat"] : false
-      state.settings.Volume = jsonData["Volume"] ? jsonData["Volume"] : 100
     }).catch((err) => {
       console.log(err)
       state.settings.lookupLocation = path.resolve(process.env["HOME"], "Music")
@@ -37,10 +36,6 @@ document.addEventListener("keypress", function(){
       finder.on('file', (file) => {
         if (path.extname(file) == ".mp3") {
           state.allFiles.push(file)
-          if(!state.nowplaying.instance) // For first time nowplaying.instance not exists so we check for it
-          {
-            state.load(state.allFiles[0]) // load first song
-          }
         }
       })
 
