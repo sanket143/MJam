@@ -20,12 +20,9 @@ const nowplaying_frame = new Vue({
       return state.nowplaying.song
     },
     onRepeatChange(){
-      if(state.nowplaying.instance) // we have to check that nowplaying.instance is exist or not
-      {
-        state.nowplaying.instance.loop(state.settings.repeat) // If exist then change settings of repeatation
-        saveSettings()     // save the settings
-        return state.settings.repeat
-      }
+      state.nowplaying.instance.loop(state.settings.repeat)
+      saveSettings()
+      return state.settings.repeat
     }
   },
   methods: {
@@ -37,12 +34,6 @@ const nowplaying_frame = new Vue({
     },
     toggleRepeat(){
       state.settings.repeat = !state.settings.repeat
-    },
-    Volume_Tweaker(){
-      var tweaker = document.getElementById("volume")
-      state.settings.Volume = tweaker.value
-      state.nowplaying.instance.volume(state.settings.Volume/100)
-      saveSettings()
     },
     toggleLoved(){
       let song_src = this.song.src
