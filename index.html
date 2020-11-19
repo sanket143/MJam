@@ -223,8 +223,6 @@
           </div>
           <div class="now-playing-options">
               <input type="hidden" :value="onRepeatChange">
-              <button><i id="volume_icon" class="material-icons">volume_up</i></button>
-              <input id="volume" v-bind:value="state.settings.Volume" v-bind:style="{background:'linear-gradient(90deg,#eb6d7f '+ state.settings.Volume+'%,#d3d3d3 '+ state.settings.Volume+'%)'}" class="volume-tweak" @input="Volume_Tweaker()" type="range" min="0" max="100" value="100"/>
               <button id="repeat" :class="{active: repeat === true}" @click="toggleRepeat()"><i class="material-icons">repeat</i></button>
               <button id="loved" v-bind:class="{active: loved === true}" @click="toggleLoved"><i class="material-icons">favorite</i></button>
           </div>
