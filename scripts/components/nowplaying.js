@@ -35,10 +35,10 @@ const nowplaying_frame = new Vue({
     toggleRepeat(){
       state.settings.repeat = !state.settings.repeat
     },
-    Volume_Tweaker(){
+    volumeTweaker(){
       var tweaker = document.getElementById("volume")
-      state.settings.Volume = tweaker.value
-      state.nowplaying.instance.volume(state.settings.Volume/100)
+      state.settings.volume = tweaker.value
+      state.nowplaying.instance.volume(state.settings.volume/100)
       saveSettings()
     },
     toggleLoved(){
