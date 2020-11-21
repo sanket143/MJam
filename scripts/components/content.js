@@ -43,8 +43,10 @@ const content_frame = new Vue({
       return state.contentFrame
     },
     all_songs(){
-      console.log("Updated")
-      return Object.values(state.songsMap)
+      let songs = state.allFiles.map((item) => {
+        return state.songsMap[item]
+      })
+      return songs
     },
     recent_songs(){
       return state.recentSongs
