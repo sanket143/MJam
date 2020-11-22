@@ -1,6 +1,5 @@
 const { readJSON } = require("./scripts/methods")
 const constants = require("./scripts/constants")
-const path = require("path")
 const express = require('express')
 const app = express()
 
@@ -13,11 +12,11 @@ app.get('/song', async (req, res) => {
         res.sendFile(path)
       } else {
         res.send("We don't serve non-mp3 files")
-      }   
-    })  
+      }
+    })
     .catch((err) => {
       console.log(err)
-    })  
+    })
 })
 
 let server = app.listen(3000, function () {
