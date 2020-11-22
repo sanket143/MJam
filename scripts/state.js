@@ -87,7 +87,7 @@ const state = new Vue({
         this.nowplaying.completion = 0
         clearInterval(this.nowplaying.tracker)
       })
-      
+ 
       this.nowplaying.song = this.songsMap[sources[0]]
     },
     play(sources){
