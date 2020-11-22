@@ -38,6 +38,12 @@ const nowplaying_frame = new Vue({
     toggleRepeat(){
       state.settings.repeat = !state.settings.repeat
     },
+    volumeTweaker(){
+      var tweaker = document.getElementById("volume")
+      state.settings.volume = tweaker.value
+      state.nowplaying.instance.volume(state.settings.volume/100)
+      saveSettings()
+    },
     toggleLoved(){
       let song_src = this.song.src
       let index = state.playlists.loved.indexOf(song_src)

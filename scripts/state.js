@@ -9,7 +9,8 @@ const state = new Vue({
     contentFrame: "home",
     settings: {
       lookupLocation: "",
-      repeat: false
+      repeat: false,
+      volume: 100
     },
     frameData: {
       artist: {
@@ -64,7 +65,8 @@ const state = new Vue({
     load(sources){
       this.nowplaying.instance = new Howl({
         src: sources,
-        loop: this.repeat
+        loop: this.repeat,
+        volume: state.settings.volume/100
       })
 
       // When song starts playing
