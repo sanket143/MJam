@@ -1,18 +1,25 @@
-(
-  function() {
-    "use strict"
-    let express = require('express')
-    let app = express()
-    app.get('/:name', function(req, res) {
-      let file = req.params.name
-      if(file.includes('.mp3'))
-        res.sendFile(path.join(state.settings.lookupLocation, file))
-      else
+const { readJSON } = require("./scripts/methods")
+const constants = require("./scripts/constants")
+const path = require("path")
+const express = require('express')
+const app = express()
+
+app.get('/song', async (req, res) => {
+  const { path } = req.query
+
+  await readJSON(constants.CACHED_FILE_SRC)
+    .then((jsonData) => {
+      if(jsonData[path]){
+        res.sendFile(path)
+      } else {
         res.send("We don't serve non-mp3 files")
-    })
-    let server = app.listen(3000, function () {
-      console.log('Express server listening on port ' + server.address().port)
-    })
-    module.exports = app
-  }()
-)
+      }   
+    })  
+    .catch((err) => {
+      console.log(err)
+    })  
+})
+
+let server = app.listen(3000, function () {
+  console.log('Express server listening on port ' + server.address().port)
+})
