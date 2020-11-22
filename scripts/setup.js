@@ -37,6 +37,10 @@ document.addEventListener("keypress", function(){
       finder.on('file', (file) => {
         if (path.extname(file) == ".mp3") {
           state.allFiles.push(file)
+          if(!state.nowplaying.instance) // For first time nowplaying.instance not exists so we check for it
+          {
+            state.load(state.allFiles[0]) // load first song
+          }
         }
       })
 
