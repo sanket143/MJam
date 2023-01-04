@@ -1,54 +1,70 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>MJam</title>
+    <meta charset="UTF-8" />
+    <title>MJam5</title>
 
-    <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./stylesheets/nowplaying.css">
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./stylesheets/nowplaying.css" />
 
     <style>
-    [v-cloak] {
-      z-index: -100;
-      opacity: 0;
-    }
+      [v-cloak] {
+        z-index: -100;
+        opacity: 0;
+      }
     </style>
   </head>
   <body>
     <script src="./scripts/vue.min.js"></script>
     <div class="title-bar">
       <h6 class="brand-logo">
-        <img src="./assets/mjam-logo.png" width="19px">
+        <img src="./assets/mjam-logo.png" width="19px" />
         <span>MJam</span>
       </h6>
       <h6 class="song-title">{{ title }}</h6>
       <div class="action-buttons">
-        <span class="minimize" @click="minimize"><i class="material-icons">remove</i></span>
-        <span class="restore" @click="maximize"><i class="material-icons">crop_landscape</i></span>
-        <span class="close" @click="close"><i class="material-icons">close</i></span>
+        <span class="minimize" @click="minimize"
+          ><i class="material-icons">remove</i></span
+        >
+        <span class="restore" @click="maximize"
+          ><i class="material-icons">crop_landscape</i></span
+        >
+        <span class="close" @click="close"
+          ><i class="material-icons">close</i></span
+        >
       </div>
     </div>
-    <div class="title-spacer" height="29px">
-
-    </div>
+    <div class="title-spacer" height="29px"></div>
     <div class="body">
       <div id="top-frame">
         <div id="sidebar">
           <h4 class="label">Library</h4>
           <div class="sidebar-buttons">
-            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'home'}" v-on:click="updateFrame('home')">
+            <a
+              class="sidebar-button"
+              v-bind:class="{'is-active': frame === 'home'}"
+              v-on:click="updateFrame('home')">
               <i class="material-icons">home</i>
               <span>Home</span>
             </a>
-            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'loved'}" v-on:click="updateFrame('loved')">
+            <a
+              class="sidebar-button"
+              v-bind:class="{'is-active': frame === 'loved'}"
+              v-on:click="updateFrame('loved')">
               <i class="material-icons">favorite</i>
               <span>Loved</span>
             </a>
-            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'songs'}" v-on:click="updateFrame('songs')">
+            <a
+              class="sidebar-button"
+              v-bind:class="{'is-active': frame === 'songs'}"
+              v-on:click="updateFrame('songs')">
               <i class="material-icons">music_note</i>
               <span>Songs</span>
             </a>
-            <a class="sidebar-button" v-bind:class="{'is-active': frame === 'settings'}" v-on:click="updateFrame('settings')">
+            <a
+              class="sidebar-button"
+              v-bind:class="{'is-active': frame === 'settings'}"
+              v-on:click="updateFrame('settings')">
               <i class="material-icons">settings</i>
               <span>Settings</span>
             </a>
@@ -57,62 +73,128 @@
         <div id="content" v-bind:class="currentTheme">
           <div class="search-bar">
             <i class="material-icons">search</i>
-            <input v-model="search_query" placeholder="Search songs, artists and albums..." type="text" id="search">
+            <input
+              v-model="search_query"
+              placeholder="Search songs, artists and albums..."
+              type="text"
+              id="search" />
           </div>
-          <transition-group name="fade" class="main-frame" v-cloak tag="div" mode="out-in">
+          <transition-group
+            name="fade"
+            class="main-frame"
+            v-cloak
+            tag="div"
+            mode="out-in">
             <div key="serach" v-if="showSearch">
               <h4 class="label">Search Result for '{{ search_query }}'</h4>
-              <transition-group name="list-complete" tag="div" class="songs-list" id="recent-home-section">
-                <div class="song list-complete-item" v-for="song in searchResult" v-bind:key="song.src">
-                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
-                    <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
+              <transition-group
+                name="list-complete"
+                tag="div"
+                class="songs-list"
+                id="recent-home-section">
+                <div
+                  class="song list-complete-item"
+                  v-for="song in searchResult"
+                  v-bind:key="song.src">
+                  <div
+                    class="song-art"
+                    :style="{ 'background-image': 'url(' + song.picture + ')' }">
+                    <div
+                      class="play-toggle"
+                      v-if="current !== song.src"
+                      v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
                     </div>
-                    <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
+                    <div
+                      class="play-toggle pause-me"
+                      v-else
+                      v-on:click="pauseMe()">
                       <i class="material-icons">pause_circle_outline</i>
                     </div>
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">{{ song.artists.join(', ') }}</h5>
+                    <h5
+                      class="song-artist"
+                      v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">
+                      {{ song.artists.join(', ') }}
+                    </h5>
                   </div>
                 </div>
               </transition-group>
             </div>
             <div key="home" v-else-if="frame == 'home'">
               <h4 class="label">Recently Played</h4>
-              <transition-group name="list-complete" tag="div" class="songs-list" id="recent-home-section">
-                <div class="song list-complete-item" v-for="song in recent_songs" v-bind:key="song.src">
-                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
-                    <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
+              <transition-group
+                name="list-complete"
+                tag="div"
+                class="songs-list"
+                id="recent-home-section">
+                <div
+                  class="song list-complete-item"
+                  v-for="song in recent_songs"
+                  v-bind:key="song.src">
+                  <div
+                    class="song-art"
+                    :style="{ 'background-image': 'url(' + song.picture + ')' }">
+                    <div
+                      class="play-toggle"
+                      v-if="current !== song.src"
+                      v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
                     </div>
-                    <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
+                    <div
+                      class="play-toggle pause-me"
+                      v-else
+                      v-on:click="pauseMe()">
                       <i class="material-icons">pause_circle_outline</i>
                     </div>
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">{{ song.artists.join(', ') }}</h5>
+                    <h5
+                      class="song-artist"
+                      v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">
+                      {{ song.artists.join(', ') }}
+                    </h5>
                   </div>
                 </div>
               </transition-group>
             </div>
             <div key="loved" v-else-if="frame == 'loved'">
               <h4 class="label">Loved Songs</h4>
-              <transition-group name="fade" tag="div" class="songs-list" id="recent-home-section">
-                <div class="song list-complete-item" v-for="song in loved_songs" v-bind:key="song.src">
-                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
-                    <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
+              <transition-group
+                name="fade"
+                tag="div"
+                class="songs-list"
+                id="recent-home-section">
+                <div
+                  class="song list-complete-item"
+                  v-for="song in loved_songs"
+                  v-bind:key="song.src">
+                  <div
+                    class="song-art"
+                    :style="{ 'background-image': 'url(' + song.picture + ')' }">
+                    <div
+                      class="play-toggle"
+                      v-if="current !== song.src"
+                      v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
                     </div>
-                    <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
+                    <div
+                      class="play-toggle pause-me"
+                      v-else
+                      v-on:click="pauseMe()">
                       <i class="material-icons">pause_circle_outline</i>
                     </div>
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">{{ song.artists.join(', ') }}</h5>
+                    <h5
+                      class="song-artist"
+                      v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">
+                      {{ song.artists.join(', ') }}
+                    </h5>
                   </div>
                 </div>
               </transition-group>
@@ -121,17 +203,27 @@
               <h4 class="label">Songs</h4>
               <div class="songs-list" id="songs-section">
                 <div class="song" v-for="song in all_songs">
-                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
-                    <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
+                  <div
+                    class="song-art"
+                    :style="{ 'background-image': 'url(' + song.picture + ')' }">
+                    <div
+                      class="play-toggle"
+                      v-if="current !== song.src"
+                      v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
                     </div>
-                    <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
+                    <div
+                      class="play-toggle pause-me"
+                      v-else
+                      v-on:click="pauseMe()">
                       <i class="material-icons">pause_circle_outline</i>
                     </div>
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">
+                    <h5
+                      class="song-artist"
+                      v-on:click="updateFrame('artist'); showArtistSongs(song.artists)">
                       {{ song.artists.join(", ") }}
                     </h5>
                   </div>
@@ -142,43 +234,55 @@
               <h4 class="label">{{ artistNames.join(", ") }}</h4>
               <div class="songs-list" id="songs-section">
                 <div class="song" v-for="song in artistSongs">
-                  <div class="song-art" :style="{ 'background-image': 'url(' + song.picture + ')' }">
-                    <div class="play-toggle" v-if="current !== song.src" v-on:click="playMe(song.src)">
+                  <div
+                    class="song-art"
+                    :style="{ 'background-image': 'url(' + song.picture + ')' }">
+                    <div
+                      class="play-toggle"
+                      v-if="current !== song.src"
+                      v-on:click="playMe(song.src)">
                       <i class="material-icons">play_circle_outline</i>
                     </div>
-                    <div class="play-toggle pause-me" v-else v-on:click="pauseMe()">
+                    <div
+                      class="play-toggle pause-me"
+                      v-else
+                      v-on:click="pauseMe()">
                       <i class="material-icons">pause_circle_outline</i>
                     </div>
                   </div>
                   <div class="song-desc">
                     <h6 class="song-title">{{ song.title }}</h6>
-                    <h5 class="song-artist" v-on:click="updateFrame('artist'); showArtistSongs(song.artist)">{{ song.artists.join(", ") }}</h5>
+                    <h5
+                      class="song-artist"
+                      v-on:click="updateFrame('artist'); showArtistSongs(song.artist)">
+                      {{ song.artists.join(", ") }}
+                    </h5>
                   </div>
                 </div>
               </div>
             </div>
             <div key="settings" v-else-if="frame == 'settings'">
               <h4 class="label">Settings</h4>
-              <div class="theme-switcher-wrap">DARK MODE
+              <div class="theme-switcher-wrap">
+                DARK MODE
                 <div class="theme-switcher">
                   <div class="switch-path">
-                    <div class="switch-handle"  v-bind:class="{'active1':currentTheme ==='theme-dark'}" v-on:click="switchTheme"></div>
+                    <div
+                      class="switch-handle"
+                      v-bind:class="{'active1':currentTheme ==='theme-dark'}"
+                      v-on:click="switchTheme"></div>
                   </div>
                 </div>
               </div>
               <div id="settings-section">
-                <div style='margin-bottom: 1em;'>
-                  <input class="mj-input" type="text" v-model="lookupDir">
-                  <input type="hidden" v-model="init">
-                  <button @click="reScan" class="mj-rescan">
-                    Rescan
-                  </button>
+                <div style="margin-bottom: 1em">
+                  <input class="mj-input" type="text" v-model="lookupDir" />
+                  <input type="hidden" v-model="init" />
+                  <button @click="reScan" class="mj-rescan">Rescan</button>
                 </div>
                 <div>
-                  <input placeholder="Username" class="mj-input" type="text">
-                  <button class="mj-rescan">
-                    Set username
-                  </button>
+                  <input placeholder="Username" class="mj-input" type="text" />
+                  <button class="mj-rescan">Set username</button>
                 </div>
               </div>
             </div>
@@ -189,7 +293,11 @@
             <h4>Artists</h4>
             <div class="artist-list">
               <div class="artist-item" v-for="artist in artists">
-                <div class="artist-name" v-on:click="updateFrame('artist');showArtistSongs([artist])"> {{ artist }} </div>
+                <div
+                  class="artist-name"
+                  v-on:click="updateFrame('artist');showArtistSongs([artist])">
+                  {{ artist }}
+                </div>
               </div>
             </div>
           </div>
@@ -200,39 +308,74 @@
     <div id="bottom-frame">
       <div id="nowplaying" v-if="song.title != undefined" v-cloak>
         <div class="seekbar-wrapper">
-            <div class="seekbar-cover">
-                <div class="seekbar">
-                    <div class="progress" :style="{ 'width': completion + '%'}"></div>
-                    <div class="handle" :style="{ 'margin-left': completion + '%'}"></div>
-                </div>
+          <div class="seekbar-cover">
+            <div class="seekbar">
+              <div class="progress" :style="{ 'width': completion + '%'}"></div>
+              <div
+                class="handle"
+                :style="{ 'margin-left': completion + '%'}"></div>
             </div>
+          </div>
         </div>
         <div class="now-playing-wrapper">
           <div class="now-playing-track">
-              <div class="now-playing-art" :style="{'background-image': 'url(' + song.picture + ')'}"></div>
-              <div class="now-playing-details">
-                  <h5 class="now-playing-track-title">{{ song.title }}</h5>
-                  <h6 class="now-playing-track-artist">{{ song.artists.join(", ") }}</h6>
-              </div>
+            <div
+              class="now-playing-art"
+              :style="{'background-image': 'url(' + song.picture + ')'}"></div>
+            <div class="now-playing-details">
+              <h5 class="now-playing-track-title">{{ song.title }}</h5>
+              <h6 class="now-playing-track-artist">
+                {{ song.artists.join(", ") }}
+              </h6>
+            </div>
           </div>
           <div class="now-playing-controls">
-              <button id="prev"><i class="material-icons">skip_previous</i></button>
-              <button id="toggle" v-if="!paused" v-on:click="pause()"><i class="material-icons">pause_circle_filled</i></button>
-              <button id="toggle" v-else v-on:click="play()"><i class="material-icons">play_circle_filled</i></button>
-              <button id="next"><i class="material-icons">skip_next</i></button>
+            <button id="prev">
+              <i class="material-icons">skip_previous</i>
+            </button>
+            <button id="toggle" v-if="!paused" v-on:click="pause()">
+              <i class="material-icons">pause_circle_filled</i>
+            </button>
+            <button id="toggle" v-else v-on:click="play()">
+              <i class="material-icons">play_circle_filled</i>
+            </button>
+            <button id="next"><i class="material-icons">skip_next</i></button>
           </div>
           <div class="now-playing-options">
-              <input type="hidden" :value="onRepeatChange">
-              <button><i id="volume_icon" class="material-icons">volume_up</i></button>
-              <input id="volume" v-bind:value="state.settings.volume" v-bind:style="{background:'linear-gradient(90deg,#eb6d7f '+ state.settings.volume+'%,#d3d3d3 '+ state.settings.volume+'%)'}" class="volume-tweak" @input="volumeTweaker()" type="range" min="0" max="100" value="100"/>
-              <button id="repeat" :class="{active: repeat === true}" @click="toggleRepeat()"><i class="material-icons">repeat</i></button>
-              <button id="loved" v-bind:class="{active: loved === true}" @click="toggleLoved"><i class="material-icons">favorite</i></button>
+            <input type="hidden" :value="onRepeatChange" />
+            <button>
+              <i id="volume_icon" class="material-icons">volume_up</i>
+            </button>
+            <input
+              id="volume"
+              v-bind:value="state.settings.volume"
+              v-bind:style="{background:'linear-gradient(90deg,#eb6d7f '+ state.settings.volume+'%,#d3d3d3 '+ state.settings.volume+'%)'}"
+              class="volume-tweak"
+              @input="volumeTweaker()"
+              type="range"
+              min="0"
+              max="100"
+              value="100" />
+            <button
+              id="repeat"
+              :class="{active: repeat === true}"
+              @click="toggleRepeat()">
+              <i class="material-icons">repeat</i>
+            </button>
+            <button
+              id="loved"
+              v-bind:class="{active: loved === true}"
+              @click="toggleLoved">
+              <i class="material-icons">favorite</i>
+            </button>
           </div>
         </div>
       </div>
     </div>
     <script src="./scripts/howler.min.js"></script>
     <script src="./scripts/setup.js"></script>
-    <script> require('./renderer.js') </script>
+    <script>
+      require('./renderer.js')
+    </script>
   </body>
 </html>
